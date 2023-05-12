@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
                 withMaven {
                     sh 'mvn clean package'
                 }
