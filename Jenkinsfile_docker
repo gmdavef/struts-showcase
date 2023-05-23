@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
+                withMaven( maven: 'mvn3.9.1' ) {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Test') {
+            environment {
+                RLLICKEY = credentials('rlLicenseKey')
+                RLSITEKEY = credentials('rlSiteKey')
+            }            
+            steps {
+                script {
+                    // Note that $PWD is null for some reason, but we can use $WORKSPACE
+                    try {
+                        sh 'echo $PWD'
+                        sh '''
+                            docker run --rm -u \$(id -u):\$(id -g) \
+                            -v "$WORKSPACE/target:/packages:ro" -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
+                            -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
+                            reversinglabs/rl-scanner:latest \
+                            rl-scan --package-path=/packages/struts2-showcase.war --report-path=/report --report-format=rl-html,rl-json,cyclonedx
+                        ''' 
+                    } 
+                    catch (err) {
+                        // Need this catch because we don't want to fail the build right now
+                        echo err.message
+                    } 
+                    finally {
+                        sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
+                    }
+                    
+                }
+            }
+        }
+    }
+    post {
+        always {
+            publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
+            archiveArtifacts artifacts: 'RLreport/latest/*.json', onlyIfSuccessful: false
+        }
+    }  
+}
