@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
+                // only need git url if script isn't under SCM
+                // git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
                 withMaven( maven: 'mvn3.9.1' ) {
                     sh 'mvn clean package'
                 }
@@ -16,7 +17,6 @@ pipeline {
             }            
             steps {
                 script {
-                    // Note that $PWD is null for some reason, but we can use $WORKSPACE
                     try {
                         sh 'echo $PWD'
                         sh '''
@@ -28,7 +28,7 @@ pipeline {
                         ''' 
                     } 
                     catch (err) {
-                        // Need this catch because we don't want to fail the build right now
+                        // Catch since we don't want to fail the overall build right now
                         echo err.message
                     } 
                     finally {
