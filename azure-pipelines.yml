@@ -40,10 +40,12 @@ steps:
     ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
     ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
 - task: PublishPipelineArtifact@1
+  displayName: 'Publish SBOM'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.cyclonedx.json
     artifactName: CycloneDX_sbom.json
-- task: PublishPipelineArtifacts@1
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish RL HTML report'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/rl-html
     artifactName: ReversingLabs_HTMLreport
