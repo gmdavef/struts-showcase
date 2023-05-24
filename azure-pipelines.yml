@@ -31,4 +31,4 @@ steps:
     pip install rl-deploy
     pip list
     rl-deploy --version
-    echo $(rlTestKey)
+    echo $(rlTestKey2)
