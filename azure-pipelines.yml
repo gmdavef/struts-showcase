@@ -21,29 +21,36 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
 - task: UsePythonVersion@0
-  displayName: 'RL Scan'
+  displayName: 'Python Setup'
   inputs:
     versionSpec: '3.x'
     addToPath: true
     architecture: 'x64'
-- script: |
-    python --version
-    python -m pip install --upgrade pip
-    pip install rl-deploy
-    rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey)
-    ./RLSecure/rl-secure license status --no-color
-    ./RLSecure/rl-secure init -s ./RLSecure
-    ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
-    ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
+
+- task: Bash@3
+  displayName: 'RL Scan'
+  inputs:
+    targetType: 'inline'  
+    script: |
+      python --version
+      python -m pip install --upgrade pip
+      pip install rl-deploy
+      rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey)
+      ./RLSecure/rl-secure license status --no-color
+      ./RLSecure/rl-secure init -s ./RLSecure
+      ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
+      ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
+
 - task: PublishPipelineArtifact@1
   displayName: 'Publish SBOM'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.cyclonedx.json
     artifactName: CycloneDX_sbom.json
+
 - task: PublishPipelineArtifact@1
   displayName: 'Publish RL HTML report'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/rl-html
-    artifactName: ReversingLabs_HTMLreport
-    
+    artifactName: ReversingLabs_HTMLreport    
