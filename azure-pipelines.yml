@@ -50,6 +50,12 @@ steps:
     artifactName: CycloneDX_sbom.json
 
 - task: PublishPipelineArtifact@1
+  displayName: 'Publish RL-json'
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.rl.json
+    artifactName: ReversingLabs_report.json
+
+- task: PublishPipelineArtifact@1
   displayName: 'Publish RL HTML report'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/rl-html
