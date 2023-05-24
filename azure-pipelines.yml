@@ -42,4 +42,9 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.cyclonedx.json
-    artifactName: CycloneDX-sbom    
+    artifactName: CycloneDX_sbom.json
+- task: PublishPipelineArtifacts@1
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/RLSecure/rl-html
+    artifactName: ReversingLabs_HTMLreport
+    
