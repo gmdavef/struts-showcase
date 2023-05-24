@@ -31,12 +31,9 @@ steps:
     python --version
     python -m pip install --upgrade pip
     pip install rl-deploy
-    pip list
-    rl-deploy --version
     rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey)
     ./RLSecure/rl-secure license status --no-color
     ./RLSecure/rl-secure init -s ./RLSecure
-    ls $(System.DefaultWorkingDirectory)/target
     ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
     ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
 - task: PublishPipelineArtifact@1
