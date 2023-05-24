@@ -10,17 +10,19 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-# - task: Maven@3
-#   inputs:
-#     mavenPomFile: 'pom.xml'
-#     mavenOptions: '-Xmx3072m'
-#     javaHomeOption: 'JDKVersion'
-#     jdkVersionOption: '1.8'
-#     jdkArchitectureOption: 'x64'
-#     publishJUnitResults: true
-#     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-#     goals: 'package'
+- task: Maven@3
+  displayName: 'Build'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
 - task: UsePythonVersion@0
+  displayName: 'RL Scan'
   inputs:
     versionSpec: '3.x'
     addToPath: true
@@ -32,5 +34,11 @@ steps:
     pip list
     rl-deploy --version
     rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey)
-    ls ./RLSecure
     ./RLSecure/rl-secure license status
+    ./RLSecure/rl-secure init -s ./RLSecure
+    ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure WebApps/struts2-showcase@2.5.28 --keep-reference'
+    ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.cyclonedx.json
+    artifactName: CycloneDX-sbom    
