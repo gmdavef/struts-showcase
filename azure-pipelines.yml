@@ -37,7 +37,7 @@ steps:
       python --version
       python -m pip install --upgrade pip
       pip install rl-deploy
-      rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey)
+      rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
       ./RLSecure/rl-secure license status --no-color
       ./RLSecure/rl-secure init -s ./RLSecure
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
