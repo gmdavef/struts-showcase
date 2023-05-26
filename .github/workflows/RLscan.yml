@@ -29,6 +29,14 @@ jobs:
           RL_SITE: ${{ secrets.RL_SITE_KEY }}
         run: ls -lt ./target
         
+      - name: Docker run
+        uses: addnab/docker-run-action@v3
+        with:
+            image: hello-world:latest
+            options: -v ${{ github.workspace }}:/work -e ABC=123
+            run: |
+              echo "...and greetings"
+                    
       #- uses: actions/upload-artifact@v3
       #  with:
       #    name: RLScanResults
