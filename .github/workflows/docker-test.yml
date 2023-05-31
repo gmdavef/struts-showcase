@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  RL_Scan:
+  Docker-Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,19 +21,30 @@ jobs:
           cache: 'maven'
           
       - name: Build
-        run: mvn -B clean package
+        run: |
+          mvn -B clean package
+          ls -lt ./target
 
       - name: Set ENV vars
         env: 
           RL_LIC: ${{ secrets.RL_LIC_KEY }}
           RL_SITE: ${{ secrets.RL_SITE_KEY }}
-        run: ls -lt ./target
         
-      - name: Docker run
+      - name: Docker test 1
         uses: addnab/docker-run-action@v3
         with:
             image: alpine:latest
             options: -v ${{ github.workspace }}:/var/www -e ABC=123
             run: |
               pwd
+              echo $ABC
+
+      - name: Docker test 2
+        uses: addnab/docker-run-action@v3
+        with:
+            image: python:3.11-alpine3.17
+            options: -v ${{ github.workspace }}:/var/www -e ABC=456
+            run: |
+              pwd
+              python --version
               echo $ABC
