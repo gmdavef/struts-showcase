@@ -25,13 +25,11 @@ jobs:
           mvn -B clean package
           ls -lt ./target
 
-      - name: Set ENV vars
-        env: 
-          RL_LIC: ${{ secrets.RL_LIC_KEY }}
-          RL_SITE: ${{ secrets.RL_SITE_KEY }}
-        
       - name: Docker test 1
         uses: addnab/docker-run-action@v3
+        env: 
+          RL_LIC: ${{ secrets.RL_LIC_KEY }}
+          RL_SITE: ${{ secrets.RL_SITE_KEY }}        
         with:
             image: alpine:latest
             options: -v ${{ github.workspace }}:/var/www -e ABC=123
