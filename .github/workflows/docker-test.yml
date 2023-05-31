@@ -1,0 +1,39 @@
+name: Docker Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  RL_Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository under $GITHUB_WORKSPACE, so job can access it
+      - name: Check out 
+        uses: actions/checkout@v3
+        
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'maven'
+          
+      - name: Build
+        run: mvn -B clean package
+
+      - name: Set ENV vars
+        env: 
+          RL_LIC: ${{ secrets.RL_LIC_KEY }}
+          RL_SITE: ${{ secrets.RL_SITE_KEY }}
+        run: ls -lt ./target
+        
+      - name: Docker run
+        uses: addnab/docker-run-action@v3
+        with:
+            image: alpine:latest
+            options: -v ${{ github.workspace }}:/var/www -e ABC=123
+            run: |
+              pwd
+              echo $ABC
