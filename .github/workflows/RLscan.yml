@@ -33,9 +33,6 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
             image: hello-world:latest
-            options: -v ${{ github.workspace }}:/work -e ABC=123
-                    
-      #- uses: actions/upload-artifact@v3
-      #  with:
-      #    name: RLScanResults
-      #    path: rl.report.json  
+            options: -v ${{ github.workspace }}:/var/www -e ABC=123
+            run: |
+              /hello
