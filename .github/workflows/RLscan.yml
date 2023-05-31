@@ -32,7 +32,8 @@ jobs:
       - name: Docker run
         uses: addnab/docker-run-action@v3
         with:
-            image: hello-world:latest
+            image: alpine:latest
             options: -v ${{ github.workspace }}:/var/www -e ABC=123
             run: |
-              /hello
+              pwd
+              echo $ABC
