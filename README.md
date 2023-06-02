@@ -7,7 +7,7 @@ A Jenkins pipeline script that builds the .war file, scans it with the [Reversin
 
 **Jenkinsfile_docker**
 
-A Jenkins pipeline script that builds the .war file, scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner), and publishes the reports in HTML, JSON, and CycloneDX formats. Using the Docker image is ideal for an ephemeral instance of Jenkins.
+A Jenkins pipeline script that builds the .war file, scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner), and publishes the reports in HTML, JSON, and CycloneDX formats. Using the Docker image is ideal for an ephemeral instance of Jenkins. 
 
 **azure-pipelines.yml**
 
