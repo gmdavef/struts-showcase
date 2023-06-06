@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  Docker-Test:
+  Build-And-Scan:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +34,7 @@ jobs:
           RL_LIC: ${{ secrets.RL_LIC_KEY }}
           RL_SITE: ${{ secrets.RL_SITE_KEY }}        
         run: |
+          mkdir $(pwd)/RLreport
           docker run --pull always --rm \
             -u $(id -u):$(id -g) \
             -v "$(pwd)/target:/packages:ro" \
