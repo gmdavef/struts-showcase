@@ -37,7 +37,7 @@ jobs:
           mkdir ./RLSecure && mkdir ./RLreports
           rl-deploy install ./RLSecure --encoded-key="${RL_LIC}" --site-key="${RL_SITE}" --no-tracking
           ./RLSecure/rl-secure init -s ./RLSecure
-          ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
+          ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference --no-tracking
           ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLreports
 
       - name: Archive Report
