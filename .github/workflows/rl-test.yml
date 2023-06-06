@@ -1,0 +1,54 @@
+name: RL Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  Docker-Test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository under $GITHUB_WORKSPACE, so job can access it
+      - name: Check out 
+        uses: actions/checkout@v3
+        
+      - name: Set Current Date Time
+        run: |
+          echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
+          
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'maven'
+          
+      - name: Build
+        run: |
+          mvn -B clean package
+          ls -lt ./target
+
+      - name: RL scan
+        env: 
+          RL_LIC: ${{ secrets.RL_LIC_KEY }}
+          RL_SITE: ${{ secrets.RL_SITE_KEY }}        
+        run: |
+          docker run --pull always --rm \
+            -u $(id -u):$(id -g) \
+            -v "$(pwd)/target:/packages:ro" \
+            -v "$(pwd)/RLreport:/report" \
+            -e RLSECURE_ENCODED_LICENSE="${RL_LIC}" \
+            -e RLSECURE_SITE_KEY="${RL_SITE}" \
+            reversinglabs/rl-scanner \
+            rl-scan \
+                --package-path=/packages/struts2-showcase.war \
+                --report-path=/report \
+                --report-format=all
+
+      - name: Archive Report
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: report-${{ env.DT_NOW }}
+          path: report                
