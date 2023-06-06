@@ -1,0 +1,49 @@
+name: RL Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  Build-And-Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository under $GITHUB_WORKSPACE, so job can access it
+      - name: Check out 
+        uses: actions/checkout@v3
+        
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'maven'
+          
+      - name: Build
+        run: |
+          mvn -B clean package
+          ls -lt ./target
+
+      - name: RL scan
+        env: 
+          RL_LIC: ${{ secrets.RL_LIC_KEY }}
+          RL_SITE: ${{ secrets.RL_SITE_KEY }}        
+        run: |
+          python --version
+          python -m pip install --upgrade pip
+          pip install rl-deploy
+          rl-deploy --version
+          mkdir ./RLSecure && mkdir ./RLreports
+          # rl-deploy install ./RLSecure --encoded-key="${RL_LIC}" --site-key="${RL_SITE}" --no-tracking
+          # ./RLSecure/rl-secure license status --no-color
+          # ./RLSecure/rl-secure init -s ./RLSecure
+          # ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
+          # ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLreports
+
+      - name: Archive Report
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: RLreports
+          path: RLreports        
