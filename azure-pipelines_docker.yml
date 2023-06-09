@@ -34,6 +34,7 @@ steps:
         reversinglabs/rl-scanner:latest \
         rl-scan --package-path=/packages/struts2-showcase.war \
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx
+      ls RLreport
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish SBOM'
