@@ -17,6 +17,10 @@ A Jenkins pipeline script that builds the .war file, scans it using the [Reversi
 
 An Azure DevOps pipeline script that builds the .war file and scans it with the ReversingLabs CLI. In this script, the [rl-deploy](https://pypi.org/project/rl-deploy/) Python package is installed and subsequently used to install and license the CLI. Scan reports in HTML, JSON, and CycloneDX formats are published as pipeline artifacts.
 
+**azure-pipelines_docker.yml**
+
+This pipeline script does the same thing as above, but doesn't install the CLI. Instead, it leverages the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner).  Scan reports in HTML, JSON, and CycloneDX formats are published as pipeline artifacts.
+
 ## GitHub Actions
 
 **rl-scan.yml**
