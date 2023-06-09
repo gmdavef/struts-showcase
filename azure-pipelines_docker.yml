@@ -37,19 +37,19 @@ steps:
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx
       ls RLreport
 
-- task: PublishPipelineArtifact@1
+- task: publish
   displayName: 'Publish SBOM'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
     artifactName: CycloneDX-SBOM
 
-- task: PublishPipelineArtifact@1
+- task: publish
   displayName: 'Publish RL-json'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
     artifactName: ReversingLabs-JSONreport
 
-- task: PublishPipelineArtifact@1
+- task: publish
   displayName: 'Publish RL HTML report'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLreport/rl-html
