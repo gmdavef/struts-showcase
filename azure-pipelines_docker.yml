@@ -23,6 +23,7 @@ steps:
     goals: 'package'
 
 - task: Bash@3
+  displayName: 'RL scan'
   inputs:
     targetType: 'inline'
     script: |
@@ -30,3 +31,9 @@ steps:
       echo 'Hello world'
       docker --version
       docker images
+      docker run --rm -u $(id -u):$(id -g) \
+      -v "./target:/packages:ro" -v "./RLreport/$BUILD_NUMBER:/report" \
+      -e RLSECURE_ENCODED_LICENSE=$(rlLicenseKey) -e RLSECURE_SITE_KEY=$(rlSiteKey) \
+      reversinglabs/rl-scanner:latest \
+      rl-scan --package-path=/packages/struts2-showcase.war \
+      --report-path=/report --report-format=rl-html,rl-json,cyclonedx
