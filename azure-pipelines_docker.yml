@@ -32,6 +32,8 @@ steps:
       docker --version
       docker images
       mkdir -p RLreport
+      pwd
+      ls
       docker run --rm -u $(id -u):$(id -g) \
       -v "$(System.DefaultWorkingDirectory)/target:/packages:ro" -v "$(System.DefaultWorkingDirectory)/RLreport:/report" \
       -e RLSECURE_ENCODED_LICENSE=$(rlLicenseKey) -e RLSECURE_SITE_KEY=$(rlSiteKey) \
