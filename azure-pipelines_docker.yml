@@ -27,6 +27,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      mkdir -p RLreport
       docker pull reversinglabs/rl-scanner:latest
       docker run --rm -u $(id -u):$(id -g) \
         -v "$(System.DefaultWorkingDirectory)/target:/packages:ro" -v "$(System.DefaultWorkingDirectory)/RLreport:/report" \
