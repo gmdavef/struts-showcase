@@ -49,7 +49,6 @@ steps:
     targetPath: $(System.DefaultWorkingDirectory)/RLreport/rl-html
     artifactName: ReversingLabs-HTMLreport
 
-steps:
 - publish: 'SBOM'
   displayName: 'Publish SBOM'
   target: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
