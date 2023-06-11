@@ -42,6 +42,7 @@ steps:
       ./RLSecure/rl-secure init -s ./RLSecure
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
       ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
+      echo '<html>HELLO THERE</html>' > ./RLSecure/test.html
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish SBOM'
@@ -64,4 +65,4 @@ steps:
 - task: PublishHtmlReport@1
   inputs:
     tabName: 'ReversingLabs Report'
-    reportDir: '$(System.DefaultWorkingDirectory)/RLSecure/rl-html/sdlc.html'
+    reportDir: '$(System.DefaultWorkingDirectory)/RLSecure/test.html'
