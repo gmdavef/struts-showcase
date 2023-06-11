@@ -65,4 +65,4 @@ steps:
 - task: publishhtmlreport@1
   inputs:
     htmlType: 'genericHTML'
-    htmlPath: '$(System.DefaultWorkingDirectory)/RLSecure/rl-html/sdlc.html'
+    htmlPath: '$(System.DefaultWorkingDirectory)/RLSecure/rl-html/sdlc-xxx.html'
