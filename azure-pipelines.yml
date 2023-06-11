@@ -59,4 +59,9 @@ steps:
   displayName: 'Publish RL HTML report'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/rl-html
-    artifactName: ReversingLabs-HTMLreport    
+    artifactName: ReversingLabs-HTMLreport
+
+- task: PublishHtmlReport@1
+  inputs:
+    tabName: 'ReversingLabs Report'
+    reportDir: '$(System.DefaultWorkingDirectory)/RLSecure/rl-html/sdlc.html'
