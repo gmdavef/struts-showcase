@@ -12,8 +12,8 @@ pipeline {
             steps {
                 sh '/bin/RLSecure/rl-secure scan target/struts2-showcase.war -s /bin/RLSecure WebApps/struts2-showcase@v2.5.28_$BUILD_NUMBER --keep-reference'
                 sh '/bin/RLSecure/rl-secure report -s /bin/RLSecure -p WebApps/struts2-showcase@v2.5.28_$BUILD_NUMBER --format cyclonedx,spdx,rl-html,rl-json --output-path RLreports/$BUILD_NUMBER'
-                sh '/bin/RLSecure/rl-secure status -s /bin/RLSecure -p WebApps/struts2-showcase@v2.5.28_$BUILD_NUMBER --return-status --no-color'
-                ls RLreports/latest
+                // sh '/bin/RLSecure/rl-secure status -s /bin/RLSecure -p WebApps/struts2-showcase@v2.5.28_$BUILD_NUMBER --return-status --no-color'
+                sh 'ls -lSr RLreports/latest'
             }
         }
     }
