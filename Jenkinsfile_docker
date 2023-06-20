@@ -24,7 +24,7 @@ pipeline {
                             -v "$WORKSPACE/target:/packages:ro" -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                             -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
                             reversinglabs/rl-scanner:latest \
-                            rl-scan --package-path=/packages/struts2-showcase.war --report-path=/report --report-format=rl-html,rl-json,cyclonedx
+                            rl-scan --package-path=/packages/struts2-showcase.war --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
                         ''' 
                     } 
                     catch (err) {
