@@ -30,12 +30,13 @@ steps:
       mkdir -p RLreport
       docker pull reversinglabs/rl-scanner:latest
       docker run --rm -u $(id -u):$(id -g) \
-        -v "$(System.DefaultWorkingDirectory)/target:/packages:ro" -v "$(System.DefaultWorkingDirectory)/RLreport:/report" \
-        -e "RLSECURE_ENCODED_LICENSE=$(rlLicenseKey)" -e "RLSECURE_SITE_KEY=$(rlSiteKey)" \
+        -v "$(System.DefaultWorkingDirectory)/target:/packages:ro" \
+        -v "$(System.DefaultWorkingDirectory)/RLreport:/report" \
+        -e "RLSECURE_ENCODED_LICENSE=$(rlLicenseKey)" \
+        -e "RLSECURE_SITE_KEY=$(rlSiteKey)" \
         reversinglabs/rl-scanner:latest \
         rl-scan --package-path=/packages/struts2-showcase.war \
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx
-      ls RLreport
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish SBOM'
