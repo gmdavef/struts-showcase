@@ -40,8 +40,12 @@ steps:
       ls RLreport
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-  displayName: 'Publish SBOM'
+  displayName: 'Publish CycloneDX'
   artifact: 'CycloneDX-SBOM'  
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM' 
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
   displayName: 'Publish RL-json'  
