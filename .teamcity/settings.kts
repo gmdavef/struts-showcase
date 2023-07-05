@@ -77,7 +77,7 @@ object RlScan : BuildType({
     name = "RL scan"
 
     artifactRules = "%system.teamcity.build.tempDir%/reports/** => rl-secure-report.zip"
-    maxRunningBuilds = 6
+    maxRunningBuilds = 5
 
     params {
         password("env.RLSECURE_SITE_KEY", "credentialsJSON:42b13434-d914-4748-97a8-361ec1afc6d3", label = "RL site key", display = ParameterDisplay.HIDDEN)
