@@ -4,7 +4,6 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.ExecBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.projectFeatures.buildReportTab
-import jetbrains.buildServer.configs.kotlin.projectFeatures.githubConnection
 import jetbrains.buildServer.configs.kotlin.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
@@ -42,12 +41,6 @@ project {
             id = "PROJECT_EXT_2"
             title = "ReversingLabs Report"
             startPage = "rl-secure-report.zip!rl-html/sdlc.html"
-        }
-        githubConnection {
-            id = "PROJECT_EXT_4"
-            displayName = "GitHub.com"
-            clientId = "44dad35144ad7214d4d9"
-            clientSecret = "credentialsJSON:4bc36637-52b8-4cf6-9d3a-2377d62e5d50"
         }
     }
 }
