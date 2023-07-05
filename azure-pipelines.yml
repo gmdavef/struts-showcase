@@ -40,14 +40,20 @@ steps:
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
       ./RLSecure/rl-secure license status --no-color
       ./RLSecure/rl-secure init -s ./RLSecure
-      ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --keep-reference
-      ./RLSecure/rl-secure report -s ./RLSecure -p WebApps/struts2-showcase@2.5.28 --format cyclonedx,rl-html,rl-json --output-path ./RLSecure
+      ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --keep-reference
+      ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish SBOM'
+  displayName: 'Publish CycloneDX'
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.cyclonedx.json
     artifactName: CycloneDX-SBOM
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish SPDX'
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/RLSecure/report.spdx.json
+    artifactName: SPDX-SBOM
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish RL-json'
