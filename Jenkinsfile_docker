@@ -5,7 +5,7 @@ pipeline {
             steps {
                 // only need git url if script isn't under SCM
                 // git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
-                withMaven( maven: 'mvn3.9.1' ) {
+                withMaven( maven: 'mvn3' ) {
                     sh 'mvn clean package'
                 }
             }
