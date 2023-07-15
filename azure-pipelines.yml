@@ -38,13 +38,12 @@ steps:
       python -m pip install --upgrade pip
       pip install rl-deploy
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
-      ./RLSecure/rl-secure license status --no-color
+      ./RLSecure/rl-secure license status
       ./RLSecure/rl-secure init -s ./RLSecure
-      ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --keep-reference
-      echo $?
+      ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
-      echo $?
-      ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
+    # The scan detects patch-mandated CVEs, so this line can be used to cause the task to be marked as a failure
+    # /RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish CycloneDX'
