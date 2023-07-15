@@ -38,7 +38,6 @@ steps:
       python -m pip install --upgrade pip
       pip install rl-deploy
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
-      ./RLSecure/rl-secure license status
       ./RLSecure/rl-secure init -s ./RLSecure
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
