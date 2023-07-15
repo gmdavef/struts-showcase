@@ -34,7 +34,6 @@ steps:
   inputs:
     targetType: 'inline'  
     script: |
-      python --version
       python -m pip install --upgrade pip
       pip install rl-deploy
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
