@@ -44,6 +44,8 @@ steps:
       echo $?
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
       echo $?
+      ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
+      echo $?
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish CycloneDX'
