@@ -41,7 +41,9 @@ steps:
       ./RLSecure/rl-secure license status --no-color
       ./RLSecure/rl-secure init -s ./RLSecure
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --keep-reference
+      echo $?
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
+      echo $?
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish CycloneDX'
