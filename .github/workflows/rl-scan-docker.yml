@@ -9,16 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out repository under $GITHUB_WORKSPACE, so job can access it
       - name: Check out 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.3
         
       - name: Set Current Date Time
         run: |
           echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
           
       - name: Set up Java
-        uses: actions/setup-java@5ffc13f4174014e2d4d4572b3d74c3fa61aeb2c2 # v3.11.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: 'zulu'
           java-version: '11'
@@ -46,10 +45,11 @@ jobs:
                 --package-path=/packages/struts2-showcase.war \
                 --report-path=/report \
                 --report-format=all
+          ls -lt $(pwd)/RLreport      
 
       - name: Archive Report
         if: success() || failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ReversingLabs-reports-${{ env.DT_NOW }}
           path: RLreport                
