@@ -9,12 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out repository under $GITHUB_WORKSPACE, so job can access it
       - name: Check out 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.3
         
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: 'zulu'
           java-version: '11'
@@ -39,10 +38,12 @@ jobs:
           ./RLSecure/rl-secure init -s ./RLSecure
           ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --keep-reference --no-tracking
           ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLreports
+          # The following line can be uncommented to cause the the step to be marked as a failure if the scan detects policy violations
+          ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status          
 
       - name: Archive Report
         if: success() || failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ReversingLabs reports
           path: RLreports        
