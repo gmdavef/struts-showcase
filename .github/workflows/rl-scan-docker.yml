@@ -29,7 +29,8 @@ jobs:
           ls -lt ./target
 
       - name: RL scan
-        continue-on-error: true  # Don't fail the run if scan finds policy violations
+        # Remove the following line if you want the overall run to fail when the scan finds policy violations
+        # continue-on-error: true
         env: 
           RL_LIC: ${{ secrets.RL_LIC_KEY }}
           RL_SITE: ${{ secrets.RL_SITE_KEY }}
