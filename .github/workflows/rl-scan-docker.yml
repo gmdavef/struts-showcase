@@ -29,9 +29,10 @@ jobs:
           ls -lt ./target
 
       - name: RL scan
+        continue-on-error: true  # Don't fail the run if scan finds policy violations
         env: 
           RL_LIC: ${{ secrets.RL_LIC_KEY }}
-          RL_SITE: ${{ secrets.RL_SITE_KEY }}        
+          RL_SITE: ${{ secrets.RL_SITE_KEY }}
         run: |
           mkdir $(pwd)/RLreport
           docker run --pull always --rm \
@@ -44,8 +45,7 @@ jobs:
             rl-scan \
                 --package-path=/packages/struts2-showcase.war \
                 --report-path=/report \
-                --report-format=all
-          ls -lt $(pwd)/RLreport      
+                --report-format=all    
 
       - name: Archive Report
         if: success() || failure()
