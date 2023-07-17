@@ -38,7 +38,7 @@ jobs:
           ./RLSecure/rl-secure init -s ./RLSecure
           ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --keep-reference --no-tracking
           ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLreports
-          # The following line can be uncommented to cause the the step to be marked as a failure if the scan detects policy violations
+          # Uncomment the following line to cause the overall run to be marked as failure when the scan detects policy violations
           ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status          
 
       - name: Archive Report
