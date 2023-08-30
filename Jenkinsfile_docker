@@ -21,10 +21,15 @@ pipeline {
                         sh 'echo $PWD'
                         sh '''
                             docker run --rm -u \$(id -u):\$(id -g) \
-                            -v "$WORKSPACE/target:/packages:ro" -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
+                            -v "$WORKSPACE/target:/packages:ro" \
+                            -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
+                            -v "$WORKSPACE/RLstore:/rlstore" \
                             -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
                             reversinglabs/rl-scanner:latest \
-                            rl-scan --package-path=/packages/struts2-showcase.war --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
+                            rl-scan \
+                            --rl-store=/var/RLstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
+                            --package-path=/packages/struts2-showcase.war \
+                            --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
                         ''' 
                     } 
                     catch (err) {
