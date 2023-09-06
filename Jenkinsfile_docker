@@ -17,29 +17,19 @@ pipeline {
             }            
             steps {
                 script {
-                   // try {
-                        sh 'echo $PWD'
-                        sh '''
-                            docker run --rm -u \$(id -u):\$(id -g) \
-                            -v "$WORKSPACE/target:/packages:ro" \
-                            -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
-                            -v "$JENKINS_HOME/RLstore:/rlstore" \
-                            -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
-                            reversinglabs/rl-scanner:latest \
-                            rl-scan \
-                            --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
-                            --package-path=/packages/struts2-showcase.war \
-                            --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
-                        ''' 
-                  //  } 
-                  //  catch (err) {
-                        // Catch since we don't want to fail the overall build right now
-                  //      echo err.message
-                  //  } 
-                  //  finally {
-                  //      sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
-                  //  }
-                    
+                    sh 'echo $PWD'
+                    sh '''
+                    docker run --rm -u \$(id -u):\$(id -g) \
+                    -v "$WORKSPACE/target:/packages:ro" \
+                    -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
+                    -v "$JENKINS_HOME/RLstore:/rlstore" \
+                    -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
+                    reversinglabs/rl-scanner:latest \
+                    rl-scan \
+                    --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
+                    --package-path=/packages/struts2-showcase.war \
+                    --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
+                    ''' 
                 }
             }
         }
@@ -47,8 +37,8 @@ pipeline {
     post {
         always {
             sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
-            publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
             archiveArtifacts artifacts: 'RLreport/latest/*.json', onlyIfSuccessful: false
+            publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
         }
     }  
 }
