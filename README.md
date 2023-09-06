@@ -7,11 +7,11 @@ NOTE: This repo has the source code and Maven build instructions for the Struts2
 
 **Jenkinsfile**
 
-A Jenkins pipeline script that builds the .war file, scans it with the [ReversingLabs CLI](https://docs.secure.software/cli/), and publishes the reports in HTML, JSON, CycloneDX, and SPDX formats. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins server.
+A Jenkins pipeline script that builds the .war file, scans it with the [ReversingLabs CLI](https://docs.secure.software/cli/), and publishes the reports in JSON, CycloneDX, and SPDX formats. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins server.
 
 **Jenkinsfile_docker**
 
-A Jenkins pipeline script that builds the .war file, scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner), and publishes the reports in HTML, JSON, CycloneDX, and SPDX formats. Using the Docker image is ideal for an ephemeral instance of Jenkins.
+A Jenkins pipeline script that builds the .war file and scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in JSON, CycloneDX, and SPDX formats are saved as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. Using the Docker image is ideal for ephemeral instances of Jenkins. However, in this example, it's assumed you have a persistent Jenkins server with a local RL package store (note the Docker run command includes the --rl-store option that references the package store location). This allows for [policy configuration via .info files](https://docs.secure.software/cli/configuration/policy-configuration#policy-configuration-files). With an ephemeral instance of Jenkins, the RL package store would need to be elsewhere. Any persistent storage location (e.g., shared network drive, S3 bucket, etc.) would work.
 
 ## Azure DevOps
 
