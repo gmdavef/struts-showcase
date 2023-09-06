@@ -36,8 +36,8 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'RLreport/$BUILD_NUMBER/*.json', onlyIfSuccessful: false
-            publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
+            archiveArtifacts artifacts: '$WORKSPACE/RLreport/$BUILD_NUMBER/*.json', onlyIfSuccessful: false
+            publishHTML(target : [reportDir: '$WORKSPACE/RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
         }
     }  
 }
