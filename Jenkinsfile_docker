@@ -17,7 +17,7 @@ pipeline {
             }            
             steps {
                 script {
-                    try {
+                   // try {
                         sh 'echo $PWD'
                         sh '''
                             docker run --rm -u \$(id -u):\$(id -g) \
@@ -31,14 +31,14 @@ pipeline {
                             --package-path=/packages/struts2-showcase.war \
                             --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
                         ''' 
-                    } 
-                    catch (err) {
+                  //  } 
+                  //  catch (err) {
                         // Catch since we don't want to fail the overall build right now
-                        echo err.message
-                    } 
-                    finally {
-                        sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
-                    }
+                  //      echo err.message
+                  //  } 
+                  //  finally {
+                  //      sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
+                  //  }
                     
                 }
             }
