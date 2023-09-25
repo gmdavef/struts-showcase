@@ -12,13 +12,14 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                // proxy is set in config.info for the CLI installed at /usr/RLSecure
+                // The RL CLI here is configured to use a proxy
                 script {
                     sh 'echo $PWD'
                     sh '/usr/RLSecure/rl-secure scan ./target/struts2-showcase.war -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --replace'
                     sh 'rm -rf RLreport'
                     sh '/usr/RLSecure/rl-secure report -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path RLreport'
                     sh '/usr/RLSecure/rl-secure license status'
+                    sh '/usr/RLSecure/rl-secure status -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28 --no-color --return-status'
                 }
             }
         }
