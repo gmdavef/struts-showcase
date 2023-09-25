@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                // only need git url if script isn't under SCM
+                // git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
+                withMaven( maven: 'mvn3' ) {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Test') {
+            environment {
+                RLLICKEY = credentials('rlLicenseKey')
+                RLSITEKEY = credentials('rlSiteKey')
+                PROXYHOST = '192.168.1.3'
+                PROXYPORT = '8080'
+            }            
+            steps {
+                script {
+                    sh 'echo $PWD'
+                    sh '''
+                    python -m pip install --upgrade pip \
+                    pip install rl-deploy \
+                    rl-deploy install /usr/RLSecure --encoded-key=$RLLICKEY --site-key=$RLSITEKEY --no-tracking \
+                    /usr/RLSecure/rl-secure init -s /usr/RLSecure \
+                    /usr/RLSecure/rl-secure scan ./target/struts2-showcase.war -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 \
+                    /usr/RLSecure/rl-secure report -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLreport \
+                    /usr/RLSecure/rl-secure license status
+                    ''' 
+                }
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: './RLreport/*.json', onlyIfSuccessful: false
+            publishHTML(target : [reportDir: './RLreport/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
+        }
+    }  
+}
