@@ -11,7 +11,7 @@ A Jenkins pipeline script that builds the .war file, scans it with the [Reversin
 
 **Jenkinsfile_proxy**
 
-A script just like the above, but uses a different instance of RL CLI that's been configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file. The same reports are generated and made available. 
+A pipeline script similar to the above, but a different instance of the RL CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
 
 **Jenkinsfile_docker**
 
