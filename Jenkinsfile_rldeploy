@@ -14,15 +14,10 @@ pipeline {
             environment {
                 RLLICKEY = credentials('rlLicenseKey')
                 RLSITEKEY = credentials('rlSiteKey')
-                PROXYHOST = '192.168.1.3'
-                PROXYPORT = '8080'
             }            
             steps {
                 script {
                     sh 'echo $PWD'
-                    sh 'pip install rl-deploy'
-                    sh 'rl-deploy install /usr/RLSecure --encoded-key=$RLLICKEY --site-key=$RLSITEKEY --proxy-server 192.168.1.3 --proxy-port 8080'
-                    sh '/usr/RLSecure/rl-secure init -s /usr/RLSecure'
                     sh '/usr/RLSecure/rl-secure scan ./target/struts2-showcase.war -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28'
                     sh '/usr/RLSecure/rl-secure report -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path RLreport'
                     sh '/usr/RLSecure/rl-secure license status'
