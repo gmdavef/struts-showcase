@@ -20,14 +20,13 @@ pipeline {
             steps {
                 script {
                     sh 'echo $PWD'
-                    sh '''
-                    python -m pip install --upgrade pip \
-                    pip install rl-deploy \
-                    rl-deploy install /usr/RLSecure --encoded-key=$RLLICKEY --site-key=$RLSITEKEY --no-tracking \
-                    /usr/RLSecure/rl-secure init -s /usr/RLSecure \
-                    /usr/RLSecure/rl-secure scan ./target/struts2-showcase.war -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 \
-                    /usr/RLSecure/rl-secure report -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLreport \
-                    /usr/RLSecure/rl-secure license status
+                    sh 'python -m pip install --upgrade pip'
+                    sh 'pip install rl-deploy'
+                    sh 'rl-deploy install /usr/RLSecure --encoded-key=$RLLICKEY --site-key=$RLSITEKEY --no-tracking'
+                    sh '/usr/RLSecure/rl-secure init -s /usr/RLSecure'
+                    sh '/usr/RLSecure/rl-secure scan ./target/struts2-showcase.war -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28'
+                    sh '/usr/RLSecure/rl-secure report -s /usr/RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLreport'
+                    sh '/usr/RLSecure/rl-secure license status'
                     ''' 
                 }
             }
