@@ -14,6 +14,8 @@ pipeline {
             environment {
                 RLLICKEY = credentials('rlLicenseKey')
                 RLSITEKEY = credentials('rlSiteKey')
+                PROXYHOST = '192.168.1.3'
+                PROXYPORT = '8080'
             }            
             steps {
                 script {
@@ -24,6 +26,7 @@ pipeline {
                     -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     -v "$JENKINS_HOME/RLstore:/rlstore" \
                     -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
+                    -e RLSECURE_PROXY_SERVER=$PROXYHOST -e RLSECURE_PROXY_PORT=$PROXYPORT \
                     reversinglabs/rl-scanner:latest \
                     rl-scan \
                     --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
