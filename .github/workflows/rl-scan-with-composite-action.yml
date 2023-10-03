@@ -1,11 +1,15 @@
 name: RL Scan with rl-scanner-composite action
 
-on: 
+on:
   pull_request: 
     types: [opened, reopened]
   push:
     branches:
       - main
+
+permissions: 
+  statuses: write
+  pull-requests: write
 
 env:
   REPORT_DIR: "RLreport"
