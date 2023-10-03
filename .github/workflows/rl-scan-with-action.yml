@@ -34,7 +34,7 @@ jobs:
         id: scan
 
         env:
-          RLSECURE_ENCODED_LICENSE:: ${{ secrets.RL_LIC_KEY }}
+          RLSECURE_ENCODED_LICENSE: ${{ secrets.RL_LIC_KEY }}
           RLSECURE_SITE_KEY: ${{ secrets.RL_SITE_KEY }}
 
         uses: reversinglabs/gh-action-rl-scanner-only@v1
