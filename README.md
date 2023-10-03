@@ -43,7 +43,7 @@ This workflow builds the .war file and scans it by leveraging the published Reve
 
 **rl-scan-with-composite-action.yml**
 
-This workflow...
+This workflow can be triggered by pull_request or push only. It builds the .war file and scans it by leveraging the published ReversingLabs GitHub Action "gh-action-rl-scanner-composite". 
 
 ## TeamCity
 
