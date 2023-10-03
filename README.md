@@ -39,7 +39,7 @@ This workflow does the same thing as above, but doesn't install the CLI. Instead
 
 **rl-scan-with-action.yml**
 
-This workflow...
+This workflow builds the .war file and scans it by leveraging the published ReversingLabs GitHub Action "gh-action-rl-scanner-only". 
 
 **rl-scan-with-composite-action.yml**
 
