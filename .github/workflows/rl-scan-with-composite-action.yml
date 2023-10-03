@@ -50,10 +50,3 @@ jobs:
           artifact-to-scan: 'target/struts2-showcase.war'
           report-path: ${{ env.REPORT_DIR }}
           rl-verbose: true
-
-      - name: Archive Report
-        if: success() || failure()
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: ReversingLabs-report-${{ env.DT_NOW }}
-          path: ${{ env.REPORT_DIR }}
