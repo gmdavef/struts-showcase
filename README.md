@@ -37,6 +37,14 @@ A workflow, triggered manually only, that builds the .war file and scans it with
 
 This workflow does the same thing as above, but doesn't install the CLI. Instead, it leverages the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Scan reports in HTML, JSON, CycloneDX, and SPDX formats are published as an artifact called "ReversingLabs reports".
 
+**rl-scan-with-action.yml**
+
+This workflow...
+
+**rl-scan-with-composite-action.yml**
+
+This workflow...
+
 ## TeamCity
 
 **.teamcity/settings.kts**
