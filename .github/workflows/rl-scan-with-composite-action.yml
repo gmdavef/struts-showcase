@@ -1,7 +1,11 @@
 name: RL Scan with rl-scanner-composite action
 
-on:
-  workflow_dispatch:
+on: 
+  pull_request: 
+    types: [opened, reopened]
+  push:
+    branches:
+      - main
 
 env:
   REPORT_DIR: "RLreport"
