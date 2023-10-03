@@ -10,6 +10,7 @@ on:
 permissions: 
   statuses: write
   pull-requests: write
+  security-events: write
 
 env:
   REPORT_DIR: "RLreport"
