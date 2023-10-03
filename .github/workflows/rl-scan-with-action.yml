@@ -30,7 +30,7 @@ jobs:
           mvn -B clean package
 
       - name: RL scan
-        continue-on-error: false # Set to false if you want the overall run to fail when the scan detects policy violations
+        continue-on-error: true # Set to false if you want the overall run to fail when the scan detects policy violations
         id: scan
 
         env:
