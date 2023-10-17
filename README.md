@@ -19,7 +19,7 @@ A Jenkins pipeline script that builds the .war file and scans it using the [Reve
 
 **Jenkinsfile_docker_proxy**
 
-A Jenkins pipeline script like the above, but the Docker image is configured to connect to the cloud via a proxy. 
+A Jenkins pipeline script just like the above, but the Docker run command includes proxy settings so that the container connects to the cloud via a proxy.
 
 ## Azure DevOps
 
