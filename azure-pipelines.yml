@@ -40,8 +40,9 @@ steps:
       ./RLSecure/rl-secure init -s ./RLSecure
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
-    # The scan detects patch-mandated CVEs, so this line can be used to cause the task to be marked as a failure
-    # /RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
+      # The following line returns a non-zero exit code if any P0 issues were detected by the scan.
+      # It can be removed to avoid the task being marked as a failure. 
+      ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish CycloneDX'
