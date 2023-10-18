@@ -33,6 +33,7 @@ pipeline {
                     // The docker run command will return a non-zero exit code (failure) if any P0 issues are detected. 
                     // The following line can be uncommented to avoid the step being marked as a failure. 
                     sh 'ls $WORKSPACE/RLreport'
+                    sh 'echo $PWD'
                 }
             }
         }
