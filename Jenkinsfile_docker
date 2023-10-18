@@ -17,8 +17,8 @@ pipeline {
             }            
             steps {
                 script {
-                    sh 'echo $PWD'
                     sh '''
+                    echo $PWD
                     docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
                     -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
@@ -29,11 +29,11 @@ pipeline {
                     --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
                     --package-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
+                    # The docker run command will return a non-zero exit code (failure) if any P0 issues are detected. 
+                    # The following line can be uncommented to avoid the step being marked as a failure. 
+                    echo $PWD
+                    ls $WORKSPACE/RLreport
                     ''' 
-                    // The docker run command will return a non-zero exit code (failure) if any P0 issues are detected. 
-                    // The following line can be uncommented to avoid the step being marked as a failure. 
-                    sh 'ls $WORKSPACE/RLreport'
-                    sh 'echo $PWD'
                 }
             }
         }
