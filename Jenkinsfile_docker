@@ -30,6 +30,9 @@ pipeline {
                     --package-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
                     ''' 
+                    # The docker run command will return a non-zero exit code (failure) if any P0 issues are detected. 
+                    # The following line can be uncommented to avoid the step being marked as a failure. 
+                    sh 'ls $WORKSPACE/RLreport'
                 }
             }
         }
