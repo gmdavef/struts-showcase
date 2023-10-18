@@ -37,9 +37,9 @@ steps:
         reversinglabs/rl-scanner:latest \
         rl-scan --package-path=/packages/struts2-showcase.war \
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
-      # The docker run command returns a non-zero exit code because the scan detects patch-mandated CVEs. 
-      # As such, the following line was added just to avoid the task being marked as a failure. 
-      ls RLreport
+      # The docker run command returns a non-zero exit code if any P0 issues are detected. 
+      # The following line can be uncommented to avoid the task being marked as a failure. 
+      # ls RLreport
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
