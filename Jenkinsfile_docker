@@ -29,8 +29,8 @@ pipeline {
                     --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
                     --package-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
-                    ls ./RLreport
                     ''' 
+                    sh 'ls RLreport'
                 }
             }
         }
