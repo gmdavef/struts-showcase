@@ -44,6 +44,13 @@ steps:
       # It can be removed to avoid the task being marked as a failure. 
       ./RLSecure/rl-secure status -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --return-status
 
+- task: PublishHtmlReport@1
+  displayName: Publish HTML Report
+  condition: succeededOrFailed()
+  inputs:
+    reportDir: $(System.DefaultWorkingDirectory)/RLSecure/rl-html/sdlc.html
+    tabName: 'RL report'
+
 - task: PublishPipelineArtifact@1
   displayName: 'Publish CycloneDX'
   condition: succeededOrFailed()
