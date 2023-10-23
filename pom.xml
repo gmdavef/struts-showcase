@@ -42,8 +42,9 @@
             </properties>
         </profile>
     </profiles>
+
     <dependencies>
-       
+
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-config-browser-plugin</artifactId>
@@ -223,15 +224,18 @@
 
         <resources>
             <!-- Include resources under src/main/java in WEB-INF/classes -->
-          <!--  <resource>
+            <resource>
                 <directory>src/main/resources</directory>
-            </resource> -->
-          <!--  <resource>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
                 <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.java</include>
-                </includes>
-            </resource> -->
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
         </resources>
 
     </build>
