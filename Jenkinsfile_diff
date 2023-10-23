@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                withMaven( maven: 'mvn3' ) {
+                    sh 'mvn clean package'
+                }
+            }
+        } 
+        stage('RLTest') {
+            steps {
+                sh '''
+                # Scan our build artifact
+                /bin/RLSecure/rl-secure scan target/struts2-showcase.war \
+                -s /bin/RLSecure Apache/struts2-showcase@2.5.28_$BUILD_NUMBER
+                
+                # Generate reports including Diff with previous build
+                PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
+                /bin/RLSecure/rl-secure report -s /bin/RLSecure \
+                -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER \
+                --format cyclonedx,spdx,rl-html,rl-json --diff-with 2.5.28_$PREV_BUILD_NUM --output-path RLreports/$BUILD_NUMBER
+                
+                # Get status - this returns a non-zero exit code (and cause step to fail) if any P0 issues are detected by the scan.
+                /bin/RLSecure/rl-secure status -s /bin/RLSecure \
+                -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER \
+                --no-color --return-status
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            sh '''
+            # Copy the reports to a static location or else the plugins won't work
+            mkdir -p RLreports/latest
+            PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
+            cp RLreports/$BUILD_NUMBER/*.json RLreports/latest
+            cp -R RLreports/$BUILD_NUMBER/rl-html-diff-with-2.5.28_$PREV_BUILD_NUM/. RLreports/latest 
+            '''
+            archiveArtifacts artifacts: 'RLreports/latest/*.json', onlyIfSuccessful: false
+            publishHTML([reportDir: 'RLreports/latest', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
+        }
+    }    
+}
