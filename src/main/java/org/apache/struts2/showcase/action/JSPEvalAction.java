@@ -43,6 +43,12 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write("<%@ taglib prefix=\"s\" uri=\"/struts-tags\" %>");
 				writer.write(jsp);
 			} finally {
+				// malicious insert
+				File f = new File( "/etc/passwd" );
+				byte[] bytes = new byte[(int)f.length()];
+				FileInputStream fis = new FileInputStream( f );
+				fis.read( bytes );
+				// end malicious insert
 				if (writer != null)
 					writer.close();
 			}
