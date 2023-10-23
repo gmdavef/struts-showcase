@@ -223,9 +223,9 @@
 
         <resources>
             <!-- Include resources under src/main/java in WEB-INF/classes -->
-            <resource>
+          <!--  <resource>
                 <directory>src/main/resources</directory>
-            </resource>
+            </resource> -->
           <!--  <resource>
                 <directory>src/main/java</directory>
                 <includes>
