@@ -45,9 +45,9 @@
     <dependencies>
 
         <dependency>
-      <groupId>eu.neilalexander</groupId>
-      <artifactId>jnacl</artifactId>
-      <version>1.0.0</version>
+    <groupId>org.zeromq</groupId>
+    <artifactId>jeromq</artifactId>
+    <version>0.5.4</version>
         </dependency>
         
         <dependency>
