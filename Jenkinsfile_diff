@@ -39,7 +39,7 @@ pipeline {
             cp -R RLreports/$BUILD_NUMBER/rl-html-diff-with-2.5.28_$PREV_BUILD_NUM/. RLreports/latest 
             '''
             archiveArtifacts artifacts: 'RLreports/latest/*.json', onlyIfSuccessful: false
-            publishHTML([reportDir: 'RLreports/latest', reportFiles: 'sdlc.html', reportName: 'RL Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
+            publishHTML([reportDir: 'RLreports/latest', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
         }
     }    
 }
