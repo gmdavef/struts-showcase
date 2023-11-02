@@ -9,6 +9,10 @@ NOTE: This repo has the source code and Maven build instructions for the Struts2
 
 A Jenkins pipeline script that builds the .war file, scans it with the [ReversingLabs CLI](https://docs.secure.software/cli/), and stores the reports in RL-JSON, CycloneDX, and SPDX formats as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins server. The inclusion of "--return-status" on the rl-secure status command causes an appropriate exit code to be returned (non-zero when scan fails policy or zero if scan passes policy).
 
+**Jenkinsfile_diff**
+
+A Jenkins pipeline script just like the above, but a differential report is generated to compare results against the previous build. With this, an extra "Diff" tab appears in the HTML report. Analyzing the diff is helpful to spot potential malware in your release.
+
 **Jenkinsfile_proxy**
 
 A pipeline script similar to the above, but a different instance of the RL CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
