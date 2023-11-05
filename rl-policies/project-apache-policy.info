@@ -3,7 +3,7 @@ policies {
     
         inherit_rules "repository_profile"
 	
-        processing 
+        processing
         {  
             filter
             {
