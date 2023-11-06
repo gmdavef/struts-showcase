@@ -8,10 +8,10 @@ policies {
         {  
             filter
             {
-                enabled   true
-                author    "dave.ferguson@reversinglabs.com"
-                timestamp "2023-10-29T11:00:00+0000"
-                reason    "Suppress Log4Shell as a test"
+                enabled   false
+                author    "security@company.com"
+                timestamp "2023-11-06T11:00:00+0000"
+                reason    "Suppress Log4Shell because we think different."
                 matches   "path"
                 pattern   "*/log4j-core-2.12.1.jar"
                 policies
@@ -24,10 +24,10 @@ policies {
             }
             filter
             {
-                enabled   true
-                author    "dave.ferguson@reversinglabs.com"
-                timestamp "2023-10-29T11:00:00+0000"
-                reason    "Researched these CVEs and think we're safe."
+                enabled   false
+                author    "security@company.com"
+                timestamp "2023-11-06T11:00:00+0000"
+                reason    "Researched these CVEs and we're safe."
                 matches   path
                 pattern   *
                 triaged
