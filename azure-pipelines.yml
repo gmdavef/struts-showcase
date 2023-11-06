@@ -51,7 +51,7 @@ steps:
 
       # Create project & package, then apply custom policy file from SCM
       $(RLSDIR)/rl-secure create -s $(RLSDIR) -p Apache/struts2-showcase
-      cp ./rl-policy/policy.info $(RLSDIR)/.rl-secure/projects/Apache/packages/struts2-showcase/.package-policy.info
+      cp -v ./rl-policy/policy.info $(RLSDIR)/.rl-secure/projects/Apache/packages/struts2-showcase/.package-policy.info
 
       # Run the scan and generate reports
       $(RLSDIR)/rl-secure scan $(ARTIFACT2SCAN) -s $(RLSDIR) -p $(PURL)
