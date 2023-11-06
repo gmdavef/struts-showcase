@@ -38,6 +38,9 @@ steps:
       pip install rl-deploy
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
       ./RLSecure/rl-secure init -s ./RLSecure
+      # Apply the custom RL policy from SCM
+      ls ./RLSecure/.rl-secure/projects/Apache/packages/struts2-showcase
+      cp ./rl-policies/struts-showcase-policy.info ./RLSecure/.rl-secure/projects/Apache/packages/struts2-showcase/.package-policy.info
       ./RLSecure/rl-secure scan ./target/struts2-showcase.war -s ./RLSecure -p Apache/struts2-showcase@2.5.28
       ./RLSecure/rl-secure report -s ./RLSecure -p Apache/struts2-showcase@2.5.28 --format cyclonedx,spdx,rl-html,rl-json --output-path ./RLSecure
       # The following line returns a non-zero exit code if any P0 issues were detected by the scan.
