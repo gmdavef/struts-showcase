@@ -11,7 +11,7 @@ pipeline {
         stage('RLTest') {
             steps {
                 // Load the custom policy from SCM
-                sh 'cp rl-policies/struts-showcase-policy.info /bin/RLSecure/.rl-secure/projects/Apache/packages/Struts2-showcase/.package-policy.info'
+                sh 'cp rl-policies/struts-showcase-policy.info /bin/RLSecure/.rl-secure/projects/Apache/packages/struts2-showcase/.package-policy.info'
                 
                 // Scan
                 sh '/bin/RLSecure/rl-secure scan target/struts2-showcase.war -s /bin/RLSecure Apache/struts2-showcase@2.5.28_$BUILD_NUMBER'
