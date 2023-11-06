@@ -6,33 +6,29 @@ policies {
 	
         processing
         {  
-            filter
-            {
-                enabled   false
+            filter {
+                enabled   true
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
-                reason    "Suppress Log4Shell because we think different."
-                matches   "path"
-                pattern   "*/log4j-core-2.12.1.jar"
-                policies
-                {
-                    SQ31101
-                    {
+                reason    "Example of allowing an SQ ID on a file to pass policy."
+                matches   path
+                pattern   "*/dwr-1.1.1.jar"
+                policies {
+                    SQ31104 {
                         blocker pass
                     }      
                 }
             }
-            filter
-            {
-                enabled   false
+            filter {
+                enabled   true
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
-                reason    "Researched these CVEs and we're safe."
+                reason    "Example of triaging vulns to pass policy."
                 matches   path
                 pattern   *
-                triaged
-                {
-                    Spring4Shell     mitigation-exists
+                triaged {
+                    Log4Shell        vulnerable-code-unused
+                    Spring4Shell     vulnerable-code-unused
                     CVE-2021-45046   mitigation-exists
                     CVE-2006-1547    vulnerable-code-absent
                     CVE-2016-1000031 vulnerable-code-absent
