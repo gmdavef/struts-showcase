@@ -38,7 +38,7 @@ steps:
       pip install rl-deploy
       rl-deploy install ./RLSecure --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
       ./RLSecure/rl-secure init -s ./RLSecure
-      ./RLSecure/rl-secure create -s ./RLSecure -p Apache/struts2-showcase@2.5.28
+      ./RLSecure/rl-secure create -s ./RLSecure -p Apache/struts2-showcase
       # Apply the custom RL policy from SCM
       ls -la ./RLSecure/.rl-secure
       ls -la ./RLSecure/.rl-secure/projects/Apache
