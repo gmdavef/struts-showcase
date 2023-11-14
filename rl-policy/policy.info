@@ -7,6 +7,19 @@ policies {
         processing
         {  
             filter {
+                enabled   true
+                author    "security@company.com"
+                timestamp "2023-11-06T11:00:00+0000"
+                reason    "Example of ignoring all policies on a file."
+                matches   file
+                pattern   "dwr-1.1.1.jar"
+                policies {
+                    SQ* {
+                        blocker pass
+                    }      
+                }
+            }
+            filter {
                 enabled   false
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
@@ -27,11 +40,8 @@ policies {
                 matches   path
                 pattern   *
                 triaged {
-                    Log4Shell        vulnerable-code-unused
-                    Spring4Shell     vulnerable-code-unused
                     CVE-2021-45046   mitigation-exists
                     CVE-2006-1547    vulnerable-code-absent
-                    CVE-2016-1000031 vulnerable-code-absent
                 }
             }
         }     
