@@ -7,7 +7,7 @@ policies {
         processing
         {  
             filter {
-                enabled   true
+                enabled   false
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
                 reason    "Example of ignoring all policies on a file."
