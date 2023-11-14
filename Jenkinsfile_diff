@@ -21,7 +21,7 @@ pipeline {
                 -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER \
                 --format cyclonedx,spdx,rl-html,rl-json --diff-with 2.5.28_$PREV_BUILD_NUM --output-path RLreports/$BUILD_NUMBER
                 
-                # Get status - this returns a non-zero exit code (and cause step to fail) if any P0 issues are detected by the scan.
+                # Get status - this returns a non-zero exit code (and cause step to fail) if any issues are found that violate policy.
                 /bin/RLSecure/rl-secure status -s /bin/RLSecure \
                 -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER \
                 --no-color --return-status
