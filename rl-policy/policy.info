@@ -2,7 +2,7 @@ policies {
     profile "package_profile" {
     
         inherit_rules "project_profile"
-	    rl_scan_level 2
+	rl_scan_level 2
 	
         processing
         {  
@@ -23,7 +23,7 @@ policies {
                 enabled   false
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
-                reason    "Example of allowing an SQ ID on a file to pass policy."
+                reason    "Example of allowing any file that matches a path to pass a specific policy."
                 matches   path
                 pattern   "*/dwr-1.1.1.jar"
                 policies {
@@ -36,7 +36,7 @@ policies {
                 enabled   false
                 author    "security@company.com"
                 timestamp "2023-11-06T11:00:00+0000"
-                reason    "Example of triaging vulns to pass policy."
+                reason    "Example of triaging specific vulns to pass policy."
                 matches   path
                 pattern   *
                 triaged {
@@ -44,6 +44,23 @@ policies {
                     CVE-2006-1547    vulnerable-code-absent
                 }
             }
-        }     
+        }
+        overrides
+        {
+            SQ31102  ;actively exploited vulnerabilities
+            {
+                enabled   true  ;set to false to disable
+                author    "security@company.com"
+                timestamp "2023-11-01T12:00:00+00:00"
+                reason    "Example of disabling a specific policy"
+            }
+            SQ31104  ;critical severity vulnerabilities
+            {
+                enabled   true  ;set to false to disable
+                author    "security@company.com"
+                timestamp "2023-11-01T12:00:00+00:00"
+                reason    "Example of disabling a specific policy"
+            }
+        } 
     }
 }
