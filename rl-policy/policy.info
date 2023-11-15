@@ -45,22 +45,5 @@ policies {
                 }
             }
         }
-        overrides
-        {
-            SQ31102  ;actively exploited vulnerabilities
-            {
-                enabled   true  ;set to false to disable
-                author    "security@company.com"
-                timestamp "2023-11-01T12:00:00+00:00"
-                reason    "Example of disabling a specific policy"
-            }
-            SQ31104  ;critical severity vulnerabilities
-            {
-                enabled   true  ;set to false to disable
-                author    "security@company.com"
-                timestamp "2023-11-01T12:00:00+00:00"
-                reason    "Example of disabling a specific policy"
-            }
-        } 
     }
 }
