@@ -28,7 +28,7 @@ pipeline {
                     --rl-portal-group=Default \
                     --purl=Apache/Struts2showcase@2.5.28 --replace \
                     --file-path=/packages/struts2-showcase.war \
-                    --submit-only
+                    --timeout=5
                     ''' 
                 }
             }
