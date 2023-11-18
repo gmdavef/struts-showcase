@@ -12,8 +12,7 @@ pipeline {
         }
         stage('Test') {
             environment {
-                RLLICKEY = credentials('rlLicenseKey')
-                RLSITEKEY = credentials('rlSiteKey')
+                RLTOK = credentials('rlApiToken')
             }            
             steps {
                 script {
@@ -22,24 +21,17 @@ pipeline {
                     echo $WORKSPACE
                     docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
-                    -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
-                    -v "$JENKINS_HOME/RLstore:/rlstore" \
-                    -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
-                    reversinglabs/rl-scanner:latest rl-scan \
-                    --rl-store=/rlstore --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
-                    --package-path=/packages/struts2-showcase.war \
-                    --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
+                    -e RLPORTAL_ACCESS_TOKEN=$RLTOK \
+                    reversinglabs/rl-scanner-cloud:latest rl-scan \
+                    --rl-portal-server=synopsys \
+                    --rl-portal-org=Synopsys \
+                    --rl-portal-group=Default \
+                    --purl=Apache/Struts2showcase@2.5.28 --replace \
+                    --file-path=/packages/struts2-showcase.war \
+                    --submit-only
                     ''' 
-                    sh 'ls RLreport'
                 }
             }
         }
     }
-    post {
-        always {
-            sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
-            archiveArtifacts artifacts: 'RLreport/latest/*.json', onlyIfSuccessful: false
-            publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
-        }
-    }  
 }
