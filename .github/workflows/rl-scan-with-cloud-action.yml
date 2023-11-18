@@ -1,0 +1,54 @@
+name: RL Scan with rl-scanner-only action
+
+on:
+  workflow_dispatch:
+
+env:
+  REPORT_DIR: "RLreport"
+
+jobs:
+  Build-And-Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3.5.3
+
+      - name: Set Current Date Time
+        run: |
+          echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
+
+      - name: Set up Java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'maven'
+
+      - name: Build
+        run: |
+          mvn -B clean package
+
+      - name: RL scan
+        continue-on-error: true
+        id: rl-scan
+
+        env:
+          RLPORTAL_ACCESS_TOKEN: ${{ secrets.RL_API_TOK }}
+
+        uses: reversinglabs/gh-action-rl-scanner-cloud-only@v1.0.0
+        with:
+          rl-verbose: true
+          rl-portal-server: synopsys
+          rl-portal-org: Synopsys
+          rl-portal-group: Default
+          rl-timeout: 5
+          rl-submit-only: false
+          artifact-to-scan: 'target/struts2-showcase.war'
+          rl-package-url: Apache/Struts2showcaseGHA@v2.5.28
+
+      - name: Output scan status
+        if: success() || failure()
+        run: |
+          echo "The status is: '${{ steps.rl-scan.outputs.status }}'"
+          echo "The description is: '${{ steps.rl-scan.outputs.description }}'"
