@@ -1,11 +1,7 @@
 name: RL Scan with rl-scanner-composite action
 
 on:
-  pull_request: 
-    types: [opened, reopened]
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions: 
   statuses: write
