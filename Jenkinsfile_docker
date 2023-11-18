@@ -25,7 +25,7 @@ pipeline {
                     -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
                     reversinglabs/rl-scanner:latest rl-scan \
-                    --rl-level=1 --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
+                    --rl-level=5 --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
                     --package-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
                     ''' 
