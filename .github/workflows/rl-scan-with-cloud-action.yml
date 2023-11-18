@@ -1,10 +1,7 @@
-name: RL Scan with rl-scanner-only action
+name: RL Scan with rl-scanner-cloud-only action
 
 on:
   workflow_dispatch:
-
-env:
-  REPORT_DIR: "RLreport"
 
 jobs:
   Build-And-Scan:
