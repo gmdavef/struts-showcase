@@ -19,6 +19,7 @@ pipeline {
                     sh '''
                     # Note: Docker image is pulled automatically if it doesn't exist
                     echo $WORKSPACE
+                    PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
                     docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
                     -e RLPORTAL_ACCESS_TOKEN=$RLTOK \
@@ -27,7 +28,7 @@ pipeline {
                     --rl-portal-org=Synopsys \
                     --rl-portal-group=Default \
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
-                    --diff-with=2.5.28 \
+                    --diff-with=2.5.28-$PREV_BUILD_NUM \
                     --file-path=/packages/struts2-showcase.war \
                     --timeout=10
                     ''' 
