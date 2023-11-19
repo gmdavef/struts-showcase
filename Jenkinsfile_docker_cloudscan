@@ -10,7 +10,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('RL-Scan') {
             environment {
                 RLTOK = credentials('rlApiToken_syn')
             }            
