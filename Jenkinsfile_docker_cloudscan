@@ -23,7 +23,7 @@ pipeline {
                     docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
                     -e RLPORTAL_ACCESS_TOKEN=$RLTOK \
-                    reversinglabs/rl-scanner-cloud:latest \
+                    reversinglabs/rl-scanner-cloud:latest rl-scan \
                     --rl-portal-server=synopsys \
                     --rl-portal-org=Synopsys \
                     --rl-portal-group=Default \
