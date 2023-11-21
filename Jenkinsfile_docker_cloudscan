@@ -28,7 +28,7 @@ pipeline {
                     --rl-portal-org=Synopsys \
                     --rl-portal-group=Default \
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
-                    --diff-with=2.5.28-24 \
+                    --diff-with=2.5.28-$PREV_BUILD_NUM \
                     --file-path=/packages/struts2-showcase.war \
                     --submit-only
                     ''' 
