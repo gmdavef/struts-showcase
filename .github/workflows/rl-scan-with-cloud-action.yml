@@ -33,7 +33,7 @@ jobs:
         env:
           RLPORTAL_ACCESS_TOKEN: ${{ secrets.RL_API_TOK }}
 
-        uses: reversinglabs/gh-action-rl-scanner-cloud-only@v1.0.0
+        uses: reversinglabs/gh-action-rl-scanner-cloud-only@v1.0.1
         with:
           rl-verbose: true
           rl-portal-server: synopsys
