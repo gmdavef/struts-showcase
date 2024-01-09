@@ -10,20 +10,16 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
- - group: rl-scanner-cloud 
-
  - name: ARTIFACT2SCAN
    value: struts2-showcase.war
  - name: REPORT_PATH
    value: RLSecure
-
  - name: RL_PORTAL_SERVER
    value: "synopsys"
  - name: RL_PORTAL_ORG
    value: "Synopsys"
  - name: RL_PORTAL_GROUP
    value: "Default"
-
  - name: RL_PACKAGE_URL
    value: "Apache/struts2-showcase@v2.5.28"
 
