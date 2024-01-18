@@ -10,17 +10,17 @@ jobs:
 
     steps:
       - name: Check out 
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4.1.1
         
       - name: Set Current Date Time
         run: |
           echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
           
       - name: Set up Java
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
           cache: 'maven'
           
       - name: Build
@@ -42,7 +42,7 @@ jobs:
             -v "$(pwd)/RLreport:/report" \
             -e RLSECURE_ENCODED_LICENSE="${RL_LIC}" \
             -e RLSECURE_SITE_KEY="${RL_SITE}" \
-            reversinglabs/rl-scanner \
+            reversinglabs/rl-scanner:latest \
             rl-scan \
                 --package-path=/packages/struts2-showcase.war \
                 --report-path=/report \
@@ -50,7 +50,7 @@ jobs:
 
       - name: Archive Report
         if: success() || failure()
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4.2.0
         with:
           name: ReversingLabs-reports-${{ env.DT_NOW }}
           path: RLreport                
