@@ -7,7 +7,7 @@ NOTE: This repo has the source code and Maven build instructions for the Struts2
 
 **Jenkinsfile**
 
-A Jenkins pipeline script that builds the .war file, scans it with the [ReversingLabs CLI](https://docs.secure.software/cli/), and stores the reports in RL-JSON, CycloneDX, and SPDX formats as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins server. The inclusion of "--return-status" on the rl-secure status command causes an appropriate exit code to be returned (non-zero when scan fails policy or zero if scan passes policy).
+A Jenkins pipeline script that builds the .war file, scans it with the [ReversingLabs CLI](https://docs.secure.software/cli/), and stores the reports in RL-JSON, CycloneDX, and SPDX formats as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins runner. The inclusion of "--return-status" on the rl-secure status command causes an appropriate exit code to be returned (non-zero when scan fails policy or zero if scan passes policy).
 
 **Jenkinsfile_diff**
 
@@ -15,19 +15,19 @@ A Jenkins pipeline script just like the above, but a differential report is gene
 
 **Jenkinsfile_proxy**
 
-A pipeline script similar to the above, but a different instance of the RL CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
+A pipeline script similar to the first one above, but a different instance of the RL CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
 
 **Jenkinsfile_docker**
 
-A Jenkins pipeline script that builds the .war file and scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in RL-JSON, CycloneDX, and SPDX formats are saved as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. Using the Docker image is ideal for ephemeral instances of Jenkins. However, in this example, it's assumed you have a persistent Jenkins server with a local RL package store (note the Docker run command includes the --rl-store option that references the package store location). This allows for [policy configuration via .info files](https://docs.secure.software/cli/configuration/policy-configuration#policy-configuration-files). With an ephemeral instance of Jenkins, the RL package store would need to be elsewhere. Any persistent storage location (e.g., shared network drive, S3 bucket, etc.) would work.
+A pipeline script that builds the .war file and scans it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in RL-JSON, CycloneDX, and SPDX formats are saved as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. Using the Docker image is ideal for ephemeral instances of Jenkins. However, in this example, it's assumed you have a persistent Jenkins server with a local RL package store (note the Docker run command includes the --rl-store option that references the package store location). This allows for [policy configuration via .info files](https://docs.secure.software/cli/configuration/policy-configuration#policy-configuration-files). With an ephemeral instance of Jenkins, the RL package store would need to be elsewhere. Any persistent storage location (e.g., shared network drive, S3 bucket, etc.) would work.
 
 **Jenkinsfile_docker_proxy**
 
-A Jenkins pipeline script just like the above, but the Docker run command includes proxy settings so that the container connects to the cloud via a proxy.
+A pipeline script just like the above, but the Docker run command includes proxy settings so that the container connects to the cloud via a proxy.
 
-**Jenkinsfile_docker_cloudscan**
+**Jenkinsfile_docker_cloudscan and Jenkinsfile_docker_cloudscan_trial**
 
-A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
+Each of these pipeline scripts builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). They upload to different instances of the RL cloud portal. The "--submit-only" option is used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
 
 ## Azure DevOps
 
