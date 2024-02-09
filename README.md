@@ -41,7 +41,7 @@ This pipeline script does the same thing as above, but doesn't install the CLI. 
 
 **azure-pipelines_docker_cloudscan_trial.yml**
 
-An Azure DevOps pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs SSCS cloud portal (the "Trial" instance). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
+An Azure DevOps pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs SSCS cloud portal (the "Trial" instance). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the SSCS cloud portal.
 
 ## GitHub Actions
 
@@ -60,6 +60,10 @@ This workflow builds the .war file and scans it by leveraging the published Reve
 **rl-scan-with-composite-action.yml**
 
 This workflow can be triggered by pull_request or push only. It builds the .war file and scans it by leveraging the published ReversingLabs GitHub Action "gh-action-rl-scanner-composite". 
+
+**rl-scan-with-cloud-action-trial.yml**
+
+This workflow builds the .war file and scans it by leveraging the published ReversingLabs GitHub Action "gh-action-rl-scanner-cloud-only". This action uses the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs SSCS cloud portal (the "Trial" instance). 
 
 ## TeamCity
 
