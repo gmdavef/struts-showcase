@@ -19,7 +19,7 @@ variables:
  - name: RL_PORTAL_ORG
    value: "Trial"
  - name: RL_PORTAL_GROUP
-   value: "SSCS Demo"
+   value: "'SSCS Demo'"
  - name: RL_PACKAGE_URL
    value: "Apache/Struts2showcaseADO@v2.5.28"
 
