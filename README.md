@@ -23,7 +23,7 @@ A Jenkins pipeline script that builds the .war file and scans it with the CLI us
 
 **Jenkinsfile_docker_proxy**
 
-A Jenkins pipeline script just like the above, but the Docker run command includes proxy settings so that the container connects to the cloud via a proxy.
+A Jenkins pipeline script just like the above, but the Docker run command includes proxy settings so that the CLI running in the container connects to the RL cloud via a proxy.
 
 **Jenkinsfile_docker_cloudscan_trial**
 
@@ -37,11 +37,11 @@ An Azure DevOps pipeline script that builds the .war file and scans it with the 
 
 **azure-pipelines_docker.yml**
 
-This pipeline script does the same thing as above, but doesn't install the CLI. Instead, it leverages the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner).  Scan reports in HTML, JSON, CycloneDX, and SPDX formats are published as pipeline artifacts.
+This pipeline script does the same thing as above, but doesn't install the CLI. Instead, it leverages the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Scan reports in HTML, JSON, CycloneDX, and SPDX formats are published as pipeline artifacts.
 
-**azure-pipelines_docker_cloudscan.yml**
+**azure-pipelines_docker_cloudscan_trial.yml**
 
-An Azure DevOps pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
+An Azure DevOps pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs SSCS cloud portal (the "Trial" instance). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
 
 ## GitHub Actions
 
