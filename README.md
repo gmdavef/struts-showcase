@@ -25,9 +25,9 @@ A Jenkins pipeline script that builds the .war file and scans it using the [Reve
 
 A Jenkins pipeline script just like the above, but the Docker run command includes proxy settings so that the container connects to the cloud via a proxy.
 
-**Jenkinsfile_docker_cloudscan**
+**Jenkinsfile_docker_cloudscan_trial**
 
-A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs SaaS Portal.
+A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [ReversingLabs Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). The scan is done in the "Trial" instance of the ReversingLabs SSCS cloud portal. The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the SSCS cloud portal.
 
 ## Azure DevOps
 
