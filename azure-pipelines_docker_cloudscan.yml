@@ -15,11 +15,11 @@ variables:
  - name: REPORT_PATH
    value: RLSecure
  - name: RL_PORTAL_SERVER
-   value: "synopsys"
+   value: "trial"
  - name: RL_PORTAL_ORG
-   value: "Synopsys"
+   value: "Trial"
  - name: RL_PORTAL_GROUP
-   value: "Default"
+   value: "SSCS Demo"
  - name: RL_PACKAGE_URL
    value: "Apache/Struts2showcaseADO@v2.5.28"
 
