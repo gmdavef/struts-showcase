@@ -11,9 +11,8 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-      - name: Set Current Date Time
+      - name: Set previous run number
         run: |
-          echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
           echo "PREV_RUN_NUMBER=$(($GITHUB_RUN_NUMBER-1))" >> ${GITHUB_ENV}
           
       - name: Set up Java
