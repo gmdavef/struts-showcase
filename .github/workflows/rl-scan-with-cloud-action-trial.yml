@@ -14,7 +14,7 @@ jobs:
       - name: Set Current Date Time
         run: |
           echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
-          expr ${{ github.run_number }} - 1 >> $PREV_RUN_NUMBER
+          expr ${{ github.run_number }} - 1 >> ${PREV_RUN_NUMBER}
           echo $PREV_RUN_NUMBER
           
       - name: Set up Java
