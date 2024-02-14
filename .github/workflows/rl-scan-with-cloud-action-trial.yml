@@ -14,8 +14,7 @@ jobs:
       - name: Set Current Date Time
         run: |
           echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
-          echo "PREV_RUN_NUMBER=(expr ${{ github.run_number }} - 1)" >> ${GITHUB_ENV}
-          echo ${{ env.PREV_RUN_NUMBER }}
+          echo "PREV_RUN_NUMBER=$($GITHUB_RUN_NUMBER-1)" >> ${GITHUB_ENV}
           
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -45,6 +44,7 @@ jobs:
           rl-submit-only: false
           artifact-to-scan: 'target/struts2-showcase.war'
           rl-package-url: Apache/Struts2showcaseGHA@v2.5.28-${{ github.run_number }}
+          rl-diff-with: v2.5.28-${{ env.PREV_RUN_NUMBER }}
 
       - name: Output scan status
         if: success() || failure()
