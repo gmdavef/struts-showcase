@@ -42,7 +42,7 @@ jobs:
           rl-timeout: 5
           rl-submit-only: false
           artifact-to-scan: 'target/struts2-showcase.war'
-          rl-package-url: Apache/Struts2showcaseGHA@v2.5.28
+          rl-package-url: Apache/Struts2showcaseGHA@v2.5.28-${{ github.run_number }}
 
       - name: Output scan status
         if: success() || failure()
