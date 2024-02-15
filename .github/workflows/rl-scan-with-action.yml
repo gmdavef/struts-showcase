@@ -12,14 +12,14 @@ jobs:
 
     steps:
       - name: Check out
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
 
       - name: Set Current Date Time
         run: |
           echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
 
       - name: Set up Java
-        uses: actions/setup-java@v4.0.0
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
@@ -37,14 +37,14 @@ jobs:
           RLSECURE_ENCODED_LICENSE: ${{ secrets.RL_LIC_KEY }}
           RLSECURE_SITE_KEY: ${{ secrets.RL_SITE_KEY }}
 
-        uses: reversinglabs/gh-action-rl-scanner-only@v1.0.1
+        uses: reversinglabs/gh-action-rl-scanner-only@v1
         with:
           artifact-to-scan: 'target/struts2-showcase.war'
           report-path: ${{ env.REPORT_DIR }}
 
       - name: Archive Report
         if: success() || failure()
-        uses: actions/upload-artifact@v4.2.0
+        uses: actions/upload-artifact@v4
         with:
           name: ReversingLabs-report-${{ env.DT_NOW }}
           path: ${{ env.REPORT_DIR }}
