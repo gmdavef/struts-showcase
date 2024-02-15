@@ -66,3 +66,4 @@ This workflow can be triggered by pull_request or push only. It builds the .war 
 **.teamcity/settings.kts**
 
 This is a TeamCity project settings file that defines two stages ("Build" and "RL scan") to build the .war file and scan it using the [ReversingLabs Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in HTML, JSON, CycloneDX, and SPDX formats are saved in a zip file artifact. With each build, the HTML report is published under a tab called "ReversingLabs Report" within TeamCity. Documentation for integrating the RL CLI with TeamCity can be found [here](https://docs.secure.software/cli/integrations/teamcity).
+
