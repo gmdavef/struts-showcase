@@ -9,14 +9,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-- group: rl-scanner
-- name: RL_VERBOSE
-  value: true
-- name: MY_ARTIFACT_TO_SCAN
-  value: target/struts2-showcase.war
-- name: REPORT_PATH
-  value: RLReport
+# variables:
+# - group: rl-scanner
+# - name: RL_VERBOSE
+#   value: true
+# - name: MY_ARTIFACT_TO_SCAN
+#   value: target/struts2-showcase.war
+# - name: REPORT_PATH
+#   value: RLReport
 
 steps:
 - task: Maven@3
@@ -35,6 +35,6 @@ steps:
   parameters:
     RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
     RLSECURE_SITE_KEY: $(rlSiteKey)
-    RL_VERBOSE: ${{ variables.RL_VERBOSE }}
-    MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
-    REPORT_PATH: ${{ variables.REPORT_PATH }}
+    RL_VERBOSE: true
+    MY_ARTIFACT_TO_SCAN: target/struts2-showcase.war
+    REPORT_PATH: RLreport
