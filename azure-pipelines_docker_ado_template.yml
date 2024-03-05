@@ -17,6 +17,8 @@ variables:
   value: target/struts2-showcase.war
 - name: REPORT_PATH
   value: RLReport
+- name: BUILD_PATH
+  value: '.'
 
 steps:
 - task: Maven@3
@@ -38,3 +40,4 @@ steps:
     RL_VERBOSE: ${{ variables.RL_VERBOSE }}
     MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
     REPORT_PATH: ${{ variables.REPORT_PATH }}
+    BUILD_PATH: ${{ variables.BUILD_PATH }}
