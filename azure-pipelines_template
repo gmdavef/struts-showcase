@@ -1,0 +1,34 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  displayName: 'Build'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx2048m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+# RL scan using public template
+- template: rl-secure-scan-ado.yml
+  parameters:
+    RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
+    RLSECURE_SITE_KEY: $(rlSiteKey)
+    RL_VERBOSE: true
+    RL_WITH_UPLOAD: true
+    BUILD_PATH: $(System.DefaultWorkingDirectory)/target
+    MY_ARTIFACT_TO_SCAN: struts2-showcase.war
+    REPORT_PATH: $(System.DefaultWorkingDirectory)/RLreport
