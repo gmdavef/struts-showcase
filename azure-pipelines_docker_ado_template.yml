@@ -35,6 +35,6 @@ steps:
   parameters:
     RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
     RLSECURE_SITE_KEY: $(rlSiteKey)
-    RL_VERBOSE: true
-    MY_ARTIFACT_TO_SCAN: target/struts2-showcase.war
-    REPORT_PATH: RLreport
+    RL_VERBOSE: ${{ variables.RL_VERBOSE }}
+    MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
+    REPORT_PATH: ${{ variables.REPORT_PATH }}
