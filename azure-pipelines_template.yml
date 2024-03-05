@@ -29,6 +29,6 @@ steps:
     RLSECURE_SITE_KEY: $(rlSiteKey)
     RL_VERBOSE: true
     RL_WITH_UPLOAD: true
-    BUILD_PATH: $(System.DefaultWorkingDirectory)/target
-    MY_ARTIFACT_TO_SCAN: struts2-showcase.war
-    REPORT_PATH: $(System.DefaultWorkingDirectory)/RLreport
+    BUILD_PATH: '$(System.DefaultWorkingDirectory)/target'
+    REPORT_PATH: '$(System.DefaultWorkingDirectory)/RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
