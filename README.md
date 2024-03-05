@@ -1,9 +1,9 @@
 # struts-showcase
-The purpose of this repo is to provide example pipeline scripts for various CI/CD tools to illustrate scanning with the ReversingLabs Spectra Assure CLI. Currently, scripts are provided for Jenkins, Azure DevOps, GitHub Actions, and TeamCity.
+The purpose of this repo is to provide example pipeline scripts for various CI/CD tools to illustrate scanning with the ReversingLabs Spectra Assure software supply chain security solution. Currently, scripts are provided for Jenkins, Azure DevOps, GitHub Actions, and TeamCity.
 
-NOTE: This repo has the source code and Maven build instructions for the Struts2 showcase web app, which came with Apache Struts v2.5.28. This is arbitrary, because the Spectra Assure CLI is capable of scanning nearly any type of software artifact that results from a build.
+NOTE: This repo contains the source code and Maven build instructions (pom.xml) for the Struts2 showcase web app. This web app was released with Apache Struts v2.5.28. This choice is somewhat arbitrary, because Spectra Assure is capable of scanning nearly any type of software artifact that results from a build.
 
-## Jenkins
+## Jenkins Examples
 
 **Jenkinsfile**
 
@@ -29,7 +29,7 @@ A Jenkins pipeline script just like the above, but the Docker run command includ
 
 A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs cloud portal.
 
-## Azure DevOps
+## Azure DevOps Examples
 
 **azure-pipelines.yml**
 
@@ -47,7 +47,7 @@ This pipeline script builds the .war file and uploads it for scanning using the 
 
 This pipeline script builds the .war file and scans it locally using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner), but here it uses a template called rl-secure-scan-ado.yml. The template also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
 
-## GitHub Actions
+## GitHub Action Examples
 
 **rl-scan.yml**
 
@@ -69,7 +69,7 @@ This workflow can be triggered by pull_request or push only. It builds the .war 
 
 This workflow builds the .war file and scans it by leveraging the published ReversingLabs GitHub Action "gh-action-rl-scanner-cloud-only". This action uses the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the Spectra Assure cloud portal (the "Trial" instance to be exact). 
 
-## TeamCity
+## TeamCity Examples
 
 **.teamcity/settings.kts**
 
