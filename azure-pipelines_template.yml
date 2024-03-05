@@ -23,7 +23,7 @@ steps:
     goals: 'package'
 
 # RL scan using public template
-- template: rl-secure-scan-ado.yml
+- template: ado-templates/rl-secure-scan-ado.yml
   parameters:
     RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
     RLSECURE_SITE_KEY: $(rlSiteKey)
