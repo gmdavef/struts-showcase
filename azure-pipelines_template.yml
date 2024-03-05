@@ -9,6 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- group: rl-scanner
+- name: REPORT_PATH # optional
+  value: RLReport
+  
 steps:
 - task: Maven@3
   displayName: 'Build'
@@ -29,5 +34,5 @@ steps:
     # RL_VERBOSE: true
     # RL_WITH_UPLOAD: true
     # BUILD_PATH: '$(System.DefaultWorkingDirectory)/target'
-    # REPORT_PATH: '$(System.DefaultWorkingDirectory)/RLreport'
+    REPORT_PATH: ${{ variables.REPORT_PATH }}
     MY_ARTIFACT_TO_SCAN: 'target/struts2-showcase.war'
