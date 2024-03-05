@@ -11,28 +11,62 @@ pool:
 
 variables:
 - group: rl-scanner
+  # variables from this group contain rl-secure license information:
+  # - RLSECURE_ENCODED_LICENSE
+  # - RLSECURE_SITE_KEY
+  # they are defined via:
+  # - https://dev.azure.com/<your organisation>/<your project>/_library?itemType=VariableGroups
+  # consult the docs for more information:
+  # - https://learn.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml
+- name: RL_VERBOSE # optional, increase verbose
+  value: true
+- name: MY_ARTIFACT_TO_SCAN # mandatory
+  value: README.md # to make it pass
+  # value: eicarcom2.zip # to make it fail
+- name: BUILD_PATH # optional if artifact is in current directory
+  value: '.'
 - name: REPORT_PATH # optional
-  value: RLReport
-  
-steps:
-- task: Maven@3
-  displayName: 'Build'
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx2048m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+  value: RlReport
+- name: RL_WITH_UPLOAD # optional, allow upload of the report files
+  value: true
+- name: RL_STORE
+  value: ''
+- name: RL_PACKAGE_URL
+  value: ''
+- name: RL_DIFF_WITH
+  value: ''
+- name: RLSECURE_PROXY_SERVER
+  value: ''
+- name: RLSECURE_PROXY_PORT
+  value: ''
+- name: RLSECURE_PROXY_USER
+  value: ''
+- name: RLSECURE_PROXY_PASSWORD
+  value: ''
 
-- template: ado-templates/rl-secure-scan-ado.yml
+steps:
+
+# build step
+- bash: |
+    echo "Pretend to build something"
+    ls -l $(MY_ARTIFACT_TO_SCAN)
+
+  displayName: 'Build the artifact'
+
+# scan step
+- template: rl-secure-scan-ado.yml
   parameters:
-    RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
-    RLSECURE_SITE_KEY: $(rlSiteKey)
-    # RL_VERBOSE: true
-    # RL_WITH_UPLOAD: true
-    # BUILD_PATH: '$(System.DefaultWorkingDirectory)/target'
+    RLSECURE_ENCODED_LICENSE: $(RLSECURE_ENCODED_LICENSE)
+    RLSECURE_SITE_KEY: $(RLSECURE_SITE_KEY)
+    RL_VERBOSE: ${{ variables.RL_VERBOSE }}
+    RL_WITH_UPLOAD:  ${{ variables.RL_WITH_UPLOAD }}
+    MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
+    BUILD_PATH: ${{ variables.BUILD_PATH }}
     REPORT_PATH: ${{ variables.REPORT_PATH }}
-    MY_ARTIFACT_TO_SCAN: 'target/struts2-showcase.war'
+    RL_STORE: ${{ variables.RL_STORE }}
+    RL_PACKAGE_URL: ${{ variables.RL_PACKAGE_URL }}
+    RL_DIFF_WITH: ${{ variables.RL_DIFF_WITH }}
+    RL_PROXY_SERVER: ${{ variables.RL_PROXY_SERVER }}
+    RL_PROXY_PORT: ${{ variables.RL_PROXY_PORT }}
+    RL_PROXY_USER: ${{ variables.RL_PROXY_USER }}
+    RL_PROXY_PASSWORD: ${{ variables.RL_PROXY_PASSWORD }}
