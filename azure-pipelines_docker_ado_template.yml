@@ -1,0 +1,40 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: rl-scanner
+- name: RL_VERBOSE
+  value: true
+- name: MY_ARTIFACT_TO_SCAN
+  value: target/struts2-showcase.war
+- name: REPORT_PATH
+  value: RLReport
+
+steps:
+- task: Maven@3
+  displayName: 'Build'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx2048m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+- template: ado-templates/rl-secure-scan-ado.yml
+  parameters:
+    RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
+    RLSECURE_SITE_KEY: $(rlSiteKey)
+    RL_VERBOSE: ${{ variables.RL_VERBOSE }}
+    MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
+    REPORT_PATH: ${{ variables.REPORT_PATH }}
