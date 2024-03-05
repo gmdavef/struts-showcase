@@ -35,7 +35,7 @@ steps:
   parameters:
     RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
     RLSECURE_SITE_KEY: $(rlSiteKey)
-    RL_VERBOSE: true
+    RL_VERBOSE: false
     MY_ARTIFACT_TO_SCAN: ${{ variables.MY_ARTIFACT_TO_SCAN }}
     BUILD_PATH: ${{ variables.BUILD_PATH }}
     REPORT_PATH: ${{ variables.REPORT_PATH }}
