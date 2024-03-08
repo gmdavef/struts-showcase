@@ -22,16 +22,16 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: rl-scanner-task@0
-    displayName: 'RL scan'
-    inputs:
-      BUILD_PATH: 'target'
-      REPORT_PATH: 'RLreport'
-      MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
-      RL_VERBOSE: true 
-    env:
-      RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
-      RLSECURE_SITE_KEY: $(rlSiteKey)
+- task: rl-scanner-task@1
+  displayName: 'RL scan'
+  inputs:
+    BUILD_PATH: 'target'
+    REPORT_PATH: 'RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+    RL_VERBOSE: true 
+  env:
+    RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
+    RLSECURE_SITE_KEY: $(rlSiteKey)
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
