@@ -27,7 +27,8 @@ steps:
     inputs:
       BUILD_PATH: 'target'
       REPORT_PATH: 'RLreport'
-      MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war' 
+      MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+      RL_VERBOSE: true 
     env:
       RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
       RLSECURE_SITE_KEY: $(rlSiteKey)
