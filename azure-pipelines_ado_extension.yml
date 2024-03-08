@@ -1,0 +1,53 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  displayName: 'Build'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx2048m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+- task: rl-scanner-task@0
+    displayName: 'RL scan'
+    inputs:
+      BUILD_PATH: 'target'
+      REPORT_PATH: 'RLreport'
+      MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war' 
+    env:
+      RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
+      RLSECURE_SITE_KEY: $(rlSiteKey)
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'  
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/rl-html
+  displayName: 'Publish RL-HTML'
+  artifact: ReversingLabs-HTMLreport
+  condition: succeededOrFailed()
