@@ -18,13 +18,12 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Note: Docker image is pulled automatically if it doesn't exist
                     echo $WORKSPACE
                     docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
                     -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
-                    reversinglabs/rl-scanner:latest rl-scan \
+                    reversinglabs/rl-scanner rl-scan \
                     --rl-level=5 --purl=Apache/Struts2showcase@2.5.28_$BUILD_NUMBER \
                     --package-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx
