@@ -43,9 +43,14 @@ This pipeline script does the same thing as above, but instead leverages the [Sp
 
 This pipeline script builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs cloud portal.
 
+**azure-pipelines_ado_extension.yml**
+
+This pipeline script builds the .war file and scans it locally using the [rl-scanner-task Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=ReversingLabs.rl-scanner-task), is published to the Azure DevOps Marketplace. Make sure to install the extension before using it. The extension leverages the Spectra Assure rl-scanner Docker image and also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
+
+
 **azure-pipelines_docker_ado_template.yml**
 
-This pipeline script builds the .war file and scans it locally using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner), but here it uses a template called rl-secure-scan-ado.yml. The template also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
+This pipeline script builds the .war file and scans it locally using a template called rl-secure-scan-ado.yml. The template leverages the Spectra Assure rl-scanner Docker image and also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
 
 ## GitHub Action Examples
 
