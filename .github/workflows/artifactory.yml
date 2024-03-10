@@ -1,0 +1,19 @@
+name: Artifactory Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  Build-And-Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup JFrog 
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ secrets.JFROG_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JFROG_TOKEN }}
+      - run: |
+          jf -v
+          jf rt ping
