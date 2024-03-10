@@ -45,7 +45,7 @@ This pipeline script builds the .war file and uploads it for scanning using the 
 
 **azure-pipelines_ado_extension.yml**
 
-This pipeline script builds the .war file and scans it locally using the [rl-scanner-task Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=ReversingLabs.rl-scanner-task), is published to the Azure DevOps Marketplace. Make sure to install the extension before using it. The extension leverages the Spectra Assure rl-scanner Docker image and also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
+This pipeline script builds the .war file and scans it locally using the [rl-scanner-task Azure DevOps extension](https://marketplace.visualstudio.com/items?itemName=ReversingLabs.rl-scanner-task), which is published to the Azure DevOps Marketplace. Make sure to install the extension before using it. The extension leverages the Spectra Assure rl-scanner Docker image and also handles publishing the scan reports as pipeline artifacts in HTML, RL-JSON, CycloneDX, and SPDX formats.
 
 
 **azure-pipelines_docker_ado_template.yml**
