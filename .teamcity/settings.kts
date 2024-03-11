@@ -90,7 +90,7 @@ object RlScan : BuildType({
     maxRunningBuilds = 5
 
     params {
-        password("env.RLSECURE_SITE_KEY", "credentialsJSON:42b13434-d914-4748-97a8-361ec1afc6d3", label = "RL site key", display = ParameterDisplay.HIDDEN)
+        password("env.RLSECURE_SITE_KEY", "credentialsJSON:eab212a7-016b-49da-8ef5-d79569130778", label = "RL site key", display = ParameterDisplay.HIDDEN)
         password("env.RLSECURE_ENCODED_LICENSE", "credentialsJSON:0fb03933-3181-4718-af4c-47396374b230", label = "RL encoded license", display = ParameterDisplay.HIDDEN)
     }
 
