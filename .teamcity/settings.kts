@@ -30,7 +30,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2023.05"
+version = "2023.11"
 
 project {
 
@@ -91,7 +91,7 @@ object RlScan : BuildType({
 
     params {
         password("env.RLSECURE_SITE_KEY", "credentialsJSON:42b13434-d914-4748-97a8-361ec1afc6d3", label = "RL site key", display = ParameterDisplay.HIDDEN)
-        password("env.RLSECURE_ENCODED_LICENSE", "credentialsJSON:378baef9-26d8-49e2-9315-f9f9f30dd86b", label = "RL encoded license", display = ParameterDisplay.HIDDEN)
+        password("env.RLSECURE_ENCODED_LICENSE", "credentialsJSON:0fb03933-3181-4718-af4c-47396374b230", label = "RL encoded license", display = ParameterDisplay.HIDDEN)
     }
 
     steps {
