@@ -47,6 +47,7 @@ steps:
       python -m pip install --upgrade pip
       pip install rl-deploy
       rl-deploy install $(RLSDIR) --encoded-key=$(rlLicenseKey) --site-key=$(rlSiteKey) --no-tracking
+      $(RLSDIR)/rl-secure --version
       $(RLSDIR)/rl-secure init -s $(RLSDIR)
 
       # Create project & package, then apply custom policy file from SCM
