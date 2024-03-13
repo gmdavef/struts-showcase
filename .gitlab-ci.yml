@@ -1,0 +1,29 @@
+variables:
+  MY_ARTIFACT_TO_SCAN: struts2-showcase.war
+  PACKAGE_PATH: ./target
+  REPORT_PATH: RlReport
+
+# REQUIREMENTS:
+#   RLSECURE_SITE_KEY: must be declared as global variables type 'variable'
+#   RLSECURE_ENCODED_LICENSE: must be declared as global variables type 'variable'
+
+include: # include the scanner to run on the test stage
+  - remote: 'https://raw.githubusercontent.com/reversinglabs/rl-scanner-gitlab-include/main/rl-scanner-gitlab-include.yml'
+
+maven-build:
+  stage: build
+
+  # select the most appropriate image for your project
+  image: maven:3.8-openjdk-17-slim
+
+  artifacts:
+    name: "build_artifact"
+    paths:
+      - $PACKAGE_PATH/*
+      - public
+    expire_in: 2 weeks
+
+  script:
+    - |
+      mvn -B clean package
+      ls -l ./target
