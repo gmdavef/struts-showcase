@@ -1,13 +1,19 @@
+# configure rules to run pipeline only when manually launched via web (this disables CI)
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"
+      when: always
+    - when: never
+
 variables:
   MY_ARTIFACT_TO_SCAN: struts2-showcase.war
   PACKAGE_PATH: ./target
   REPORT_PATH: RlReport
+  RLSECURE_ENCODED_LICENSE: $RL_LIC_KEY
+  RLSECURE_SITE_KEY: $RL_SITE_KEY
+  RL_VERBOSE: true
 
-# REQUIREMENTS:
-#   RLSECURE_SITE_KEY: must be declared as global variables type 'variable'
-#   RLSECURE_ENCODED_LICENSE: must be declared as global variables type 'variable'
-
-include: # include the scanner to run on the test stage
+include:
   - remote: 'https://raw.githubusercontent.com/reversinglabs/rl-scanner-gitlab-include/main/rl-scanner-gitlab-include.yml'
 
 maven-build:
