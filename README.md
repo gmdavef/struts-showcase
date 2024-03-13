@@ -84,4 +84,4 @@ This is a TeamCity project settings file that defines two stages ("Build" and "R
 
 **.gitlab-ci.yml**
 
-This pipeline works in GitLab CI/CD runners. The pipeline has two jobs - one that build the .war file and another that scans it using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). A pre-defined script provided by ReversingLabs ("rl-scanner-gitlab-include.yml") is leveraged to handle details of the running the scan and saving the reports as job artifacts. 
+This pipeline works in GitLab CI/CD runners. The pipeline has two stages - "build" and "test". The build stage has 1 job that builds the .war file. The test stage has 1 job that scans the .war using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). YAML provided by ReversingLabs ("rl-scanner-gitlab-include.yml") is used to handle kicking off the scan and saving the reports as job artifacts.
