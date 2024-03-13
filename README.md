@@ -1,5 +1,5 @@
 # struts-showcase
-The purpose of this repo is to provide example pipeline scripts for various CI/CD tools to illustrate scanning with the ReversingLabs Spectra Assure software supply chain security solution. Currently, scripts are provided for Jenkins, Azure DevOps, GitHub Actions, and TeamCity.
+The purpose of this repo is to provide example pipeline scripts for various CI/CD tools to illustrate scanning with the ReversingLabs Spectra Assure software supply chain security solution. Currently, scripts are provided for Jenkins, Azure DevOps, GitHub Actions, TeamCity, and GitLab.
 
 NOTE: This repo contains the source code and Maven build instructions (pom.xml) for the Struts2 showcase web app. This web app was released with Apache Struts v2.5.28. This choice is somewhat arbitrary, because Spectra Assure is capable of scanning nearly any type of software artifact that results from a build.
 
@@ -79,3 +79,9 @@ This workflow builds the .war file and scans it by leveraging the published Reve
 **.teamcity/settings.kts**
 
 This is a TeamCity project settings file that defines two stages ("Build" and "RL scan") to build the .war file and scan it using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in HTML, RL-JSON, CycloneDX, and SPDX formats are saved in a zip file artifact. With each build, the HTML report is published under a tab called "ReversingLabs Report" within TeamCity. Documentation for integrating the RL CLI with TeamCity can be found [here](https://docs.secure.software/cli/integrations/teamcity).
+
+## GitLab Examples
+
+**.gitlab-ci.yml**
+
+This pipeline works in GitLab CI/CD runners. The pipeline has two jobs - one that build the .war file and another that scans it using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). A pre-defined script provided by ReversingLabs ("rl-scanner-gitlab-include.yml") is leveraged to handle details of the running the scan and saving the reports as job artifacts. 
