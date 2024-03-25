@@ -31,22 +31,22 @@ steps:
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'SSCS Demo'
-    RL_PACKAGE_URL: 'Apache/Struts2showcaseADO@v2.5.28-${{ github.run_number }}'
+    RL_PACKAGE_URL: 'Apache/Struts2showcaseADOext@v2.5.28-${{ github.run_number }}'
     RL_VERBOSE: true 
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlLicenseKey)
 
-  - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-    displayName: 'Publish CycloneDX'
-    artifact: 'CycloneDX-SBOM'
-    condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
 
-  - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-    displayName: 'Publish SPDX'
-    artifact: 'SPDX-SBOM'
-    condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
 
-  - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-    displayName: 'Publish RL-json'
-    artifact: ReversingLabs-JSONreport
-    condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
