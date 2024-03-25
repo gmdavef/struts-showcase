@@ -34,7 +34,7 @@ steps:
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
   env:
-    RLPORTAL_ACCESS_TOKEN: $(rlLicenseKey)
+    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
