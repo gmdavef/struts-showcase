@@ -33,22 +33,22 @@ steps:
     RLSECURE_ENCODED_LICENSE: $(rlLicenseKey)
     RLSECURE_SITE_KEY: $(rlSiteKey)
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-#   displayName: 'Publish CycloneDX'
-#   artifact: 'CycloneDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-#   displayName: 'Publish SPDX'
-#   artifact: 'SPDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-#   displayName: 'Publish RL-json'  
-#   artifact: ReversingLabs-JSONreport
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'  
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/rl-html
-#   displayName: 'Publish RL-HTML'
-#   artifact: ReversingLabs-HTMLreport
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/rl-html
+  displayName: 'Publish RL-HTML'
+  artifact: ReversingLabs-HTMLreport
+  condition: succeededOrFailed()
