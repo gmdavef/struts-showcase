@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh '''
                     echo $WORKSPACE
-                    docker run --pull always --rm -u \$(id -u):\$(id -g) \
+                    docker run --rm -u \$(id -u):\$(id -g) \
                     -v "$WORKSPACE/target:/packages:ro" \
                     -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     -e RLSECURE_ENCODED_LICENSE=$RLLICKEY -e RLSECURE_SITE_KEY=$RLSITEKEY \
