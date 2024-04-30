@@ -7,7 +7,7 @@ NOTE: This repo contains the source code and Maven build instructions (pom.xml) 
 
 **Jenkinsfile**
 
-A Jenkins pipeline script that builds the .war file, scans it with the [Spectra Assure CLI](https://docs.secure.software/cli/), and stores the reports in RL-JSON, CycloneDX, and SPDX formats as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the RL CLI has been installed on a dedicated/persistent Jenkins server. The inclusion of "--return-status" on the rl-secure status command causes an appropriate exit code to be returned (non-zero when scan fails policy or zero if scan passes policy).
+A Jenkins pipeline script that builds the .war file, scans it with the [Spectra Assure CLI](https://docs.secure.software/cli/), and stores the reports in RL-JSON, CycloneDX, and SPDX formats as build artifacts. The HTML report is published and available under the "ReversingLabs Report" link in Jenkins. This script works for a scenario where the CLI has been installed on a dedicated/persistent Jenkins server. The inclusion of "--return-status" on the rl-secure status command causes an appropriate exit code to be returned (non-zero when scan fails policy or zero if scan passes policy).
 
 **Jenkinsfile_diff**
 
@@ -15,7 +15,7 @@ A Jenkins pipeline script just like the above, but a differential report is gene
 
 **Jenkinsfile_proxy**
 
-A pipeline script similar to the above, but a different instance of the RL CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
+A pipeline script similar to the above, but a different instance of the CLI is used that's configured to connect to the cloud via a proxy. Proxy details are stored in the config.info file at the root of the package store. The same reports are generated and made available. 
 
 **Jenkinsfile_docker**
 
@@ -27,7 +27,7 @@ A Jenkins pipeline script just like the above, but the Docker run command includ
 
 **Jenkinsfile_docker_cloudscan_trial**
 
-A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs cloud portal.
+A Jenkins pipeline script that builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the Spectra Assure cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the Spectra Assure cloud portal.
 
 ## Azure DevOps Examples
 
@@ -41,7 +41,7 @@ This pipeline script does the same thing as above, but instead leverages the [Sp
 
 **azure-pipelines_docker_cloudscan_trial.yml**
 
-This pipeline script builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the ReversingLabs cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the ReversingLabs cloud portal.
+This pipeline script builds the .war file and uploads it for scanning using the [Spectra Assure Cloud Scan Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner-cloud). Here, the scan happens in the Spectra Assure cloud portal (the "Trial" instance to be exact). The "--submit-only" option can be used so that the pipeline proceeds without waiting for the scan to finish and the stage will pass regardless of scan results. If it's decided the pipeline should wait for the scan to complete, the stage may pass or fail depending on the results and reports in RL-JSON, SARIF, CycloneDX, and SPDX formats can be downloaded and saved as build artifacts. Either way, the HTML report is available in the Spectra Assure cloud portal.
 
 **azure-pipelines_ado_extension.yml**
 
@@ -78,7 +78,7 @@ This workflow builds the .war file and scans it by leveraging the published Reve
 
 **.teamcity/settings.kts**
 
-This is a TeamCity project settings file that defines two stages ("Build" and "RL scan") to build the .war file and scan it using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in HTML, RL-JSON, CycloneDX, and SPDX formats are saved in a zip file artifact. With each build, the HTML report is published under a tab called "ReversingLabs Report" within TeamCity. Documentation for integrating the RL CLI with TeamCity can be found [here](https://docs.secure.software/cli/integrations/teamcity).
+This is a TeamCity project settings file that defines two stages ("Build" and "RL scan") to build the .war file and scan it using the [Spectra Assure Docker image](https://hub.docker.com/r/reversinglabs/rl-scanner). Reports in HTML, RL-JSON, CycloneDX, and SPDX formats are saved in a zip file artifact. With each build, the HTML report is published under a tab called "ReversingLabs Report" within TeamCity. Documentation for integrating the Spectra Assure CLI with TeamCity can be found [here](https://docs.secure.software/cli/integrations/teamcity).
 
 ## GitLab Examples
 
