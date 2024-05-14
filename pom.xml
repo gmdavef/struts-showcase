@@ -222,8 +222,8 @@
             </plugin>
         </plugins>
 
-       <!--  <resources>
-            <!-- Include resources under src/main/java in WEB-INF/classes -->
+        <!-- Include resources under src/main/java in WEB-INF/classes -->
+      <!--  <resources>  
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
