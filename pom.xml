@@ -223,7 +223,7 @@
         </plugins>
 
         <!-- Include resources under src/main/java in WEB-INF/classes -->
-      <!--  <resources>  
+        <resources>  
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
@@ -236,7 +236,7 @@
                     <exclude>**/*.java</exclude>
                 </excludes>
             </resource>
-        </resources>  -->
+        </resources>
 
     </build>
     <properties>
