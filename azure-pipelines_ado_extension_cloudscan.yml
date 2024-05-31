@@ -30,7 +30,7 @@ steps:
     MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
-    RLPORTAL_GROUP: 'SSCS Demo'
+    RLPORTAL_GROUP: 'ProdMgmt'
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
   env:
