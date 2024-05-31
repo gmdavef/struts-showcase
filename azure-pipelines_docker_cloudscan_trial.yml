@@ -19,7 +19,7 @@ variables:
  - name: RL_PORTAL_ORG
    value: "Trial"
  - name: RL_PORTAL_GROUP
-   value: "'SSCS Demo'"
+   value: "'ProdMgmt'"
  - name: RL_PACKAGE_URL
    value: "Apache/Struts2showcaseADO@v2.5.28"
 
@@ -52,7 +52,7 @@ steps:
           --file-path=/packages/$(ARTIFACT2SCAN) \
           --report-path=/report \
           --report-format=all
-  displayName: 'RL scan via Docker Cloud Scan image'
+  displayName: 'RL scan via rl-scanner-cloud Docker image'
 
 - publish: $(System.DefaultWorkingDirectory)/$(REPORT_PATH)/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
