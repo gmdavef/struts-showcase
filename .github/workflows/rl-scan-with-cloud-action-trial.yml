@@ -38,7 +38,7 @@ jobs:
           rl-verbose: true
           rl-portal-server: trial
           rl-portal-org: Trial
-          rl-portal-group: 'SSCS Demo'
+          rl-portal-group: 'ProdMgmt'
           rl-timeout: 5
           rl-submit-only: false
           artifact-to-scan: 'target/struts2-showcase.war'
