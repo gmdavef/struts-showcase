@@ -4,9 +4,12 @@ pipeline {
         stage('Build') {
             steps {
                 withMaven( maven: 'mvn3' ) {
-                    sh 'mvn clean package'
+                    sh '''
+                    # Build the war
+                    mvn clean package
                     # Remove any and all source files from the war 
-                    sh 'zip -d target/struts2-showcase.war *.java'
+                    zip -d target/struts2-showcase.war *.java
+                    '''
                 }
             }
         } 
