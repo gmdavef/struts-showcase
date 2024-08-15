@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-# Set build name (Build.BuildNumber)
+# Set build number as desired
 name: v2.5.28-$(Rev:r)
 
 steps:
@@ -26,7 +26,7 @@ steps:
     goals: 'package'
 
 
-- script: echo 'Build name is $(Build.BuildNumber)'
+- script: echo 'Build number is $(Build.BuildNumber)'
 
 - task: rl-scanner-cloud-task@1
   displayName: 'RL scan'
