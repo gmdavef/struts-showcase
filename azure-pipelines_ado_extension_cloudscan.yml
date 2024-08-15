@@ -30,7 +30,7 @@ steps:
     echo 'Build number is $(Build.BuildNumber)'
     echo 'Build ID is $(Build.BuildId)'
     export _PREV=$(($(Build.BuildId)-1))
-    echo 'Previous build ID is $_PREV'
+    echo 'Previous build ID is $(_PREV)'
 
 
 # - task: rl-scanner-cloud-task@1
