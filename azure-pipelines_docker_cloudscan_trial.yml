@@ -44,7 +44,6 @@ steps:
       -v $(System.DefaultWorkingDirectory)/$(REPORT_PATH):/report \
       reversinglabs/rl-scanner-cloud:latest \
         rl-scan \
-          --replace \
           --rl-portal-server=$(RL_PORTAL_SERVER) \
           --rl-portal-org=$(RL_PORTAL_ORG) \
           --rl-portal-group=$(RL_PORTAL_GROUP) \
