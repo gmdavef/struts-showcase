@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
+- task: Maven@4
   displayName: 'Build'
   inputs:
     mavenPomFile: 'pom.xml'
