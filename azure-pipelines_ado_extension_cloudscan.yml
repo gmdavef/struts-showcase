@@ -24,7 +24,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- script: echo '$(Build.BuildNumber)'
+- script: echo 'BuildNumber is $(Build.BuildNumber)'
 
 # - task: rl-scanner-cloud-task@1
 #   displayName: 'RL scan'
