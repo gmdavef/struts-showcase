@@ -29,7 +29,7 @@ steps:
 - script: |
     echo 'Build number is $(Build.BuildNumber)'
     echo 'Build ID is $(Build.BuildId)'
-    export _PREV=$(($Build.BuildId-1))
+    export _PREV=$(($(Build.BuildId)-1))
     echo 'Previous build ID is $_PREV'
 
 
