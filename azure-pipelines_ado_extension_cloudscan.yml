@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 # Set build name (Build.BuildNumber)
-name: v2.5.28-.$(Rev:r)
+name: v2.5.28-$(Rev:r)
 
 steps:
 - task: Maven@3
@@ -28,31 +28,31 @@ steps:
 
 - script: echo 'Build name is $(Build.BuildNumber)'
 
-# - task: rl-scanner-cloud-task@1
-#   displayName: 'RL scan'
-#   inputs:
-#     BUILD_PATH: 'target'
-#     REPORT_PATH: 'RLreport'
-#     MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
-#     RLPORTAL_SERVER: 'trial'
-#     RLPORTAL_ORG: 'Trial'
-#     RLPORTAL_GROUP: 'ProdMgmt'
-#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Rev:r)
-#     RL_VERBOSE: true 
-#   env:
-#     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
+- task: rl-scanner-cloud-task@1
+  displayName: 'RL scan'
+  inputs:
+    BUILD_PATH: 'target'
+    REPORT_PATH: 'RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+    RLPORTAL_SERVER: 'trial'
+    RLPORTAL_ORG: 'Trial'
+    RLPORTAL_GROUP: 'ProdMgmt'
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@$(Build.BuildNumber)
+    RL_VERBOSE: true 
+  env:
+    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-#   displayName: 'Publish CycloneDX'
-#   artifact: 'CycloneDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-#   displayName: 'Publish SPDX'
-#   artifact: 'SPDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-#   displayName: 'Publish RL-json'
-#   artifact: ReversingLabs-JSONreport
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
