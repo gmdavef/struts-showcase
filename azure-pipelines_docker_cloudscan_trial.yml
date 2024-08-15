@@ -24,7 +24,7 @@ variables:
    value: "Apache/Struts2showcaseADO@v2.5.28"
 
 steps:
-- task: Maven@3
+- task: Maven@4
   displayName: 'Build'
   inputs:
     mavenPomFile: 'pom.xml'
