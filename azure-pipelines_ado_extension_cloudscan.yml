@@ -29,35 +29,33 @@ steps:
 - script: |
     echo 'Build number is $(Build.BuildNumber)'
     echo 'Build ID is $(Build.BuildId)'
-    export _PREV=$(($(Build.BuildId)-1))
-    echo 'Previous build ID is $(_PREV)'
 
+- task: rl-scanner-cloud-task@1
+  displayName: 'RL scan'
+  inputs:
+    BUILD_PATH: 'target'
+    REPORT_PATH: 'RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+    RLPORTAL_SERVER: 'trial'
+    RLPORTAL_ORG: 'Trial'
+    RLPORTAL_GROUP: 'ProdMgmt'
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@$(Build.BuildNumber)
+    RL_VERBOSE: true 
+#    RL_DIFF_WITH: 
+  env:
+    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
-# - task: rl-scanner-cloud-task@1
-#   displayName: 'RL scan'
-#   inputs:
-#     BUILD_PATH: 'target'
-#     REPORT_PATH: 'RLreport'
-#     MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
-#     RLPORTAL_SERVER: 'trial'
-#     RLPORTAL_ORG: 'Trial'
-#     RLPORTAL_GROUP: 'ProdMgmt'
-#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@$(Build.BuildNumber)
-#     RL_VERBOSE: true 
-#   env:
-#     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-#   displayName: 'Publish CycloneDX'
-#   artifact: 'CycloneDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-#   displayName: 'Publish SPDX'
-#   artifact: 'SPDX-SBOM'
-#   condition: succeededOrFailed()
-
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-#   displayName: 'Publish RL-json'
-#   artifact: ReversingLabs-JSONreport
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
