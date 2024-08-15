@@ -9,6 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+# Set build name (Build.BuildNumber)
 name: v2.5.28-.$(Rev:r)
 
 steps:
@@ -24,7 +25,8 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- script: echo 'BuildNumber is $(Build.BuildNumber)'
+
+- script: echo 'Build name is $(Build.BuildNumber)'
 
 # - task: rl-scanner-cloud-task@1
 #   displayName: 'RL scan'
