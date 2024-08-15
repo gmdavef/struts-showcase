@@ -13,7 +13,7 @@ pool:
 name: v2.5.28-$(Rev:r)
 
 steps:
-- task: Maven@3
+- task: Maven@4
   displayName: 'Build'
   inputs:
     mavenPomFile: 'pom.xml'
