@@ -39,7 +39,7 @@ steps:
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'ProdMgmt'
-    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@$(Build.BuildNumber)
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildId)
     RL_VERBOSE: true 
 #    RL_DIFF_WITH: 
   env:
