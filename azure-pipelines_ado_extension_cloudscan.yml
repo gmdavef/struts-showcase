@@ -34,12 +34,10 @@ steps:
     targetType: 'inline'  
     script: |
       echo 'Build number is $(Build.BuildNumber)'
-      export TESTVAR=$(Build.BuildNumber)
-      echo $TESTVAR
-      export CALCVAR=$((9+1))
-      echo $CALCVAR
-      export CALCVAR2=$(($TESTVAR+1))
-      echo $CALCVAR2
+      export BN=$(Build.BuildNumber)
+      echo 'BN is $BN'
+      export PREVBN=$(($BN-1))
+      echo 'PREVBN is $PREVBN'
 
 
 # - task: rl-scanner-cloud-task@1
