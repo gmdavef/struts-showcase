@@ -25,37 +25,46 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-
 - script: |
     echo 'Build number is $(Build.BuildNumber)'
     echo 'Build ID is $(Build.BuildId)'
 
-- task: rl-scanner-cloud-task@1
-  displayName: 'RL scan'
+- task: Bash@3
+  displayName: 'Testing'
   inputs:
-    BUILD_PATH: 'target'
-    REPORT_PATH: 'RLreport'
-    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
-    RLPORTAL_SERVER: 'trial'
-    RLPORTAL_ORG: 'Trial'
-    RLPORTAL_GROUP: 'ProdMgmt'
-    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28$(Build.BuildNumber)
-    RL_VERBOSE: true 
-#    RL_DIFF_WITH: 
-  env:
-    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
+    targetType: 'inline'  
+    script: |
+      echo 'Build number is $(Build.BuildNumber)'
+      export TESTVAR=$(Build.BuildNumber)
+      echo $TESTVAR
 
-- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-  displayName: 'Publish CycloneDX'
-  artifact: 'CycloneDX-SBOM'
-  condition: succeededOrFailed()
 
-- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-  displayName: 'Publish SPDX'
-  artifact: 'SPDX-SBOM'
-  condition: succeededOrFailed()
+# - task: rl-scanner-cloud-task@1
+#   displayName: 'RL scan'
+#   inputs:
+#     BUILD_PATH: 'target'
+#     REPORT_PATH: 'RLreport'
+#     MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+#     RLPORTAL_SERVER: 'trial'
+#     RLPORTAL_ORG: 'Trial'
+#     RLPORTAL_GROUP: 'ProdMgmt'
+#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28$(Build.BuildNumber)
+#     RL_VERBOSE: true 
+# #    RL_DIFF_WITH: 
+#   env:
+#     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
-- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-  displayName: 'Publish RL-json'
-  artifact: ReversingLabs-JSONreport
-  condition: succeededOrFailed()
+# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+#   displayName: 'Publish CycloneDX'
+#   artifact: 'CycloneDX-SBOM'
+#   condition: succeededOrFailed()
+
+# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+#   displayName: 'Publish SPDX'
+#   artifact: 'SPDX-SBOM'
+#   condition: succeededOrFailed()
+
+# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+#   displayName: 'Publish RL-json'
+#   artifact: ReversingLabs-JSONreport
+#   condition: succeededOrFailed()
