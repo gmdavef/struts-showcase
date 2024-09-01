@@ -39,21 +39,20 @@ steps:
       export PREVBN=$(($BN-1))
       echo 'PREVBN is ' $PREVBN
 
-
-# - task: rl-scanner-cloud-task@1
-#   displayName: 'RL scan'
-#   inputs:
-#     BUILD_PATH: 'target'
-#     REPORT_PATH: 'RLreport'
-#     MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
-#     RLPORTAL_SERVER: 'trial'
-#     RLPORTAL_ORG: 'Trial'
-#     RLPORTAL_GROUP: 'ProdMgmt'
-#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
-#     RL_VERBOSE: true 
-# #    RL_DIFF_WITH: 
-#   env:
-#     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
+- task: rl-scanner-cloud-task@1
+  displayName: 'RL scan'
+  inputs:
+    BUILD_PATH: 'target'
+    REPORT_PATH: 'RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+    RLPORTAL_SERVER: 'trial'
+    RLPORTAL_ORG: 'Trial'
+    RLPORTAL_GROUP: 'ProdMgmt'
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
+    RL_VERBOSE: true 
+    RL_DIFF_WITH: $PREVBN
+  env:
+    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
 # - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
 #   displayName: 'Publish CycloneDX'
