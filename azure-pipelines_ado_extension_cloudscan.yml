@@ -36,9 +36,10 @@ steps:
       echo 'Build number is $(Build.BuildNumber)'
       export TESTVAR=$(Build.BuildNumber)
       echo $TESTVAR
-      echo $((9+8))
-      export CALCVAR=$((9+8))
+      export CALCVAR=$((9+1))
       echo $CALCVAR
+      export CALCVAR2=$(($TESTVAR+1))
+      echo $CALCVAR2
 
 
 # - task: rl-scanner-cloud-task@1
