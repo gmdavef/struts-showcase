@@ -38,6 +38,7 @@ steps:
       echo 'BN is ' $BN
       export PREVBN=$(($BN-1))
       echo 'PREVBN is ' $PREVBN
+      echo "##vso[task.setvariable variable=pbn]$PREVBN"
 
 - task: rl-scanner-cloud-task@1
   displayName: 'RL scan'
@@ -50,7 +51,7 @@ steps:
     RLPORTAL_GROUP: 'ProdMgmt'
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
-    RL_DIFF_WITH: $PREVBN
+    RL_DIFF_WITH: $PBN
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
