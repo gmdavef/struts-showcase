@@ -37,6 +37,8 @@ steps:
       export TESTVAR=$(Build.BuildNumber)
       echo $TESTVAR
       echo $((9+8))
+      export CALCVAR=$((9+8))
+      echo $CALCVAR
 
 
 # - task: rl-scanner-cloud-task@1
