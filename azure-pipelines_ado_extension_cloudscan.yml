@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 # Set build number as desired
-name: v2.5.28-$(Rev:r)
+name: -$(Rev:r)
 
 steps:
 - task: Maven@4
@@ -39,7 +39,7 @@ steps:
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'ProdMgmt'
-    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildId)
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28$(Build.BuildNumber)
     RL_VERBOSE: true 
 #    RL_DIFF_WITH: 
   env:
