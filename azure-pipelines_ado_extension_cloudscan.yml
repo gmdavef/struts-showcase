@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-# Set build number as desired
+# Set Build.BuildNumber to a simple incrementing integer
 name: $(Rev:r)
 
 steps:
@@ -33,7 +33,6 @@ steps:
   inputs:
     targetType: 'inline'  
     script: |
-      echo 'Build number is $(Build.BuildNumber)'
       export BN=$(Build.BuildNumber)
       echo 'BN is ' $BN
       export PREVBN=$(($BN-1))
@@ -51,7 +50,7 @@ steps:
     RLPORTAL_GROUP: 'ProdMgmt'
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
-    RL_DIFF_WITH: $PBN
+    RL_DIFF_WITH: v2.5.28-$PBN
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
