@@ -30,6 +30,7 @@ steps:
     echo 'Build ID is $(Build.BuildId)'
 
 - task: Bash@3
+  displayName: 'Set prev build num'
   inputs:
     targetType: 'inline'  
     script: |
@@ -48,23 +49,23 @@ steps:
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'ProdMgmt'
-    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
-    RL_DIFF_WITH: v2.5.28-$PBN
+    RL_DIFF_WITH: 2.5.28-$PBN
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
-#   displayName: 'Publish CycloneDX'
-#   artifact: 'CycloneDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
-#   displayName: 'Publish SPDX'
-#   artifact: 'SPDX-SBOM'
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
 
-# - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
-#   displayName: 'Publish RL-json'
-#   artifact: ReversingLabs-JSONreport
-#   condition: succeededOrFailed()
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
