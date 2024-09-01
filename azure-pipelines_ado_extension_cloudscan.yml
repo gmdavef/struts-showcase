@@ -35,9 +35,9 @@ steps:
     script: |
       echo 'Build number is $(Build.BuildNumber)'
       export BN=$(Build.BuildNumber)
-      echo 'BN is $BN'
+      echo 'BN is ' $BN
       export PREVBN=$(($BN-1))
-      echo 'PREVBN is $PREVBN'
+      echo 'PREVBN is ' $PREVBN
 
 
 # - task: rl-scanner-cloud-task@1
