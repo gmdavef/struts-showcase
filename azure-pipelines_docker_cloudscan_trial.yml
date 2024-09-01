@@ -64,6 +64,7 @@ steps:
           --purl=$(RL_PACKAGE_URL)-$(Build.BuildNumber) \
           --file-path=/packages/$(ARTIFACT2SCAN) \
           --report-path=/report \
+          --diff-with=2.5.28-$PBN \
           --report-format=all
   displayName: 'RL scan via rl-scanner-cloud Docker image'
 
