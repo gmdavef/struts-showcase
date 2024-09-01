@@ -209,9 +209,8 @@
                         <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
                     </webAppConfig>
                 </configuration>
-             </plugin>
-
-        <!--    <plugin>
+            </plugin>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <excludes>
@@ -220,7 +219,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-        -->  
             <plugin>    
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
