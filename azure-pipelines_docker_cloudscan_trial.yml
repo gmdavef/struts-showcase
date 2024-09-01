@@ -61,7 +61,7 @@ steps:
           --rl-portal-server=$(RL_PORTAL_SERVER) \
           --rl-portal-org=$(RL_PORTAL_ORG) \
           --rl-portal-group=$(RL_PORTAL_GROUP) \
-          --purl=$(RL_PACKAGE_URL)-$(Build.BuildId) \
+          --purl=$(RL_PACKAGE_URL)-$(Build.BuildNumber) \
           --file-path=/packages/$(ARTIFACT2SCAN) \
           --report-path=/report \
           --report-format=all
