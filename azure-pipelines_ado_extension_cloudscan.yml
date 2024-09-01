@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 # Set build number as desired
-name: -$(Rev:r)
+name: $(Rev:r)
 
 steps:
 - task: Maven@4
@@ -30,13 +30,13 @@ steps:
     echo 'Build ID is $(Build.BuildId)'
 
 - task: Bash@3
-  displayName: 'Testing'
   inputs:
     targetType: 'inline'  
     script: |
       echo 'Build number is $(Build.BuildNumber)'
       export TESTVAR=$(Build.BuildNumber)
       echo $TESTVAR
+      echo $((9+8))
 
 
 # - task: rl-scanner-cloud-task@1
@@ -48,7 +48,7 @@ steps:
 #     RLPORTAL_SERVER: 'trial'
 #     RLPORTAL_ORG: 'Trial'
 #     RLPORTAL_GROUP: 'ProdMgmt'
-#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28$(Build.BuildNumber)
+#     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@v2.5.28-$(Build.BuildNumber)
 #     RL_VERBOSE: true 
 # #    RL_DIFF_WITH: 
 #   env:
