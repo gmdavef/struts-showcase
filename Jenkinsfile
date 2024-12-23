@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        jfrog 'jfrog-cli'
+    }
     stages {
         stage('Build') {
             steps {
@@ -8,6 +11,11 @@ pipeline {
                 }
             }
         } 
+        stage('Artifactory') {
+            steps {
+                jf 'rt u target/*.war my-release-candidates/'
+            }   
+        }
         stage('RLTest') {
             steps {
                 // Apply the custom policy file from SCM
