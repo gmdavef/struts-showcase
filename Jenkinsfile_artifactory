@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    tools {
+        jfrog 'jfrog-cli'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                git url: 'https://github.com/gmdavef/struts-showcase', branch: 'main'
+                withMaven( maven: 'mvn3' ) {
+                    sh 'mvn clean package'
+                }
+            }
+        } 
+        stage('Artifactory') {
+            steps {
+                jf 'rt u target/*.war my-release-candidates/'
+            }   
+        }
+    }
+}
