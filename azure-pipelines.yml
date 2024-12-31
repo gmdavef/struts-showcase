@@ -55,7 +55,7 @@ steps:
       cp -v ./rl-policy/policy.info $(RLSDIR)/.rl-secure/projects/Apache/packages/struts2-showcase/.package-policy.info
 
       # Run the scan and generate reports
-      $(RLSDIR)/rl-secure scan $(ARTIFACT2SCAN) -s $(RLSDIR) -p $(PURL)
+      $(RLSDIR)/rl-secure scan $(ARTIFACT2SCAN) -s $(RLSDIR) -p $(PURL) --no-tracking
       $(RLSDIR)/rl-secure report -s $(RLSDIR) -p $(PURL) --format cyclonedx,spdx,rl-html,rl-json --output-path $(RLSDIR)
       
       # The following line returns a non-zero exit code if any policy failures are detected by the scan.
