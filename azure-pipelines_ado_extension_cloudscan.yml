@@ -27,7 +27,7 @@ steps:
 - task: Bash@3
   displayName: 'Set prev build num'
   inputs:
-    targetType: 'inline'  
+    targetType: 'inline'
     script: |
       export BN=$(Build.BuildNumber)
       echo 'BN is ' $BN
