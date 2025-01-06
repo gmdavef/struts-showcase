@@ -15,6 +15,7 @@ pipeline {
         } 
         stage('Artifactory') {
             steps {
+                jf 'version'
                 jf 'c show'
                 jf 'rt u target/*.war my-release-candidates/'
             }   
