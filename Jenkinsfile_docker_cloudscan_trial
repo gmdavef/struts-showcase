@@ -18,17 +18,18 @@ pipeline {
                 script {
                     sh '''
                     echo $WORKSPACE
+                    mkdir -p "$WORKSPACE/RLreport/$BUILD_NUMBER"
                     PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
                     docker run --rm -u \$(id -u):\$(id -g) \
-                    -v "$WORKSPACE/target:/packages:ro" \
                     -e RLPORTAL_ACCESS_TOKEN=$RLTOK \
+                    -v "$WORKSPACE/target:/packages:ro" \
+                    -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     reversinglabs/rl-scanner-cloud rl-scan \
-                    --rl-portal-server=trial \
-                    --rl-portal-org=Trial \
-                    --rl-portal-group="ProdMgmt" \
+                    --rl-portal-server=trial --rl-portal-org=Trial --rl-portal-group=ProdMgmt \
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
                     --diff-with=2.5.28-$PREV_BUILD_NUM \
                     --file-path=/packages/struts2-showcase.war \
+                    --report-path=/report --report-format=rl-html,rl-json,cyclonedx \
                     --submit-only
                     ''' 
                 }
