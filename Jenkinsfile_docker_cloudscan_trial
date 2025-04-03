@@ -27,10 +27,11 @@ pipeline {
                     reversinglabs/rl-scanner-cloud rl-scan \
                     --rl-portal-server=trial --rl-portal-org=Trial --rl-portal-group=ProdMgmt \
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
-                  #  --diff-with=2.5.28-$PREV_BUILD_NUM \
+                  
                     --file-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-summary-pdf,rl-json,cyclonedx \
                     --submit-only
+                  #  --diff-with=2.5.28-$PREV_BUILD_NUM \
                     ''' 
                 }
             }
