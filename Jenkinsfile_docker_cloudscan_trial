@@ -21,7 +21,7 @@ pipeline {
                     mkdir -p "$WORKSPACE/RLreport/$BUILD_NUMBER"
                     PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
 
-                    # NOTE: Use --submit-only if we don't want to wait for the scan to finish and don't need reports saved as build artifacts.
+                    # NOTE: Use --submit-only if the build should not wait for the scan to finish and we don't need reports saved as build artifacts.
                     docker run --rm -u \$(id -u):\$(id -g) -e RLPORTAL_ACCESS_TOKEN=$RLTOK \
                     -v "$WORKSPACE/target:/packages:ro" -v "$WORKSPACE/RLreport/$BUILD_NUMBER:/report" \
                     reversinglabs/rl-scanner-cloud rl-scan \
@@ -29,8 +29,8 @@ pipeline {
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
                     --file-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-summary-pdf,rl-json,cyclonedx \
-                    --diff-with=2.5.28-$PREV_BUILD_NUM \
-                    --submit-only
+                    --diff-with=2.5.28-$PREV_BUILD_NUM
+                    # --submit-only
                     ''' 
                 }
             }
