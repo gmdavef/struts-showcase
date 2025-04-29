@@ -30,6 +30,7 @@ pipeline {
                     --file-path=/packages/struts2-showcase.war \
                     --report-path=/report --report-format=rl-summary-pdf,rl-json,cyclonedx \
                     --diff-with=2.5.28-$PREV_BUILD_NUM
+                  # Use if we don't want to wait for the scan to finish and don't need reports saved as build artifacts.
                   #  --submit-only
                     ''' 
                 }
