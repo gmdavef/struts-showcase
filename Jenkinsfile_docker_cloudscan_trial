@@ -38,7 +38,7 @@ pipeline {
     }
     post {
         always {
-            sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
+            sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.* RLreport/latest'
             archiveArtifacts artifacts: 'RLreport/latest/*.*', onlyIfSuccessful: false
         }
     }  
