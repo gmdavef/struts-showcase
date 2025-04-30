@@ -18,7 +18,7 @@ pipeline {
                 sh '''
                 # Scan our build artifact
                 /bin/RLSecure/rl-secure scan target/struts2-showcase.war \
-                -s /bin/RLSecure -p Apache/struts2-showcaseDIFF@2.5.28_$BUILD_NUMBER
+                -s /bin/RLSecure -p Apache/struts2-showcaseDIFF@2.5.28_$BUILD_NUMBER --no-tracking
                 
                 # Generate reports including Diff with previous build
                 PREV_BUILD_NUM=`expr $BUILD_NUMBER - 1`
