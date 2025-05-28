@@ -43,7 +43,7 @@ jobs:
           rl-submit-only: false
           artifact-to-scan: 'target/struts2-showcase.war'
           rl-package-url: Apache/Struts2showcaseGHA@v2.5.28-${{ github.run_number }}
-          rl-diff-with: v2.5.28-${{ env.PREV_RUN_NUMBER }}
+          # rl-diff-with: v2.5.28-${{ env.PREV_RUN_NUMBER }}
 
       - name: Output scan status
         if: success() || failure()
