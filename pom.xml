@@ -184,6 +184,17 @@
     </dependencies>
 
     <build>
+
+        <!-- DF: added 3/11/2025 -->
+        <pluginManagement>
+          <plugins>
+	        <plugin>
+	          <artifactId>maven-dependency-plugin</artifactId>
+	          <version>2.10</version>
+	        </plugin>
+	      </plugins>
+	    </pluginManagement>
+        
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
