@@ -145,6 +145,16 @@
             <scope>test</scope>
         </dependency>
 
+<!-- malicious local jar for testing -->
+<!--
+        <dependency>
+            <groupId>carl.ambo</groupId>
+            <artifactId>strrat</artifactId>
+            <version>[1.0.0]</version>
+            <scope>runtime</scope>
+        </dependency>
+-->
+
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
