@@ -35,7 +35,7 @@ steps:
       echo 'PREVBN is ' $PREVBN
       echo "##vso[task.setvariable variable=pbn]$PREVBN"
 
-- task: rl-scanner-cloud-task@1
+- task: rl-scanner-cloud-task@1.0.11
   displayName: 'RL scan'
   inputs:
     BUILD_PATH: 'target'
