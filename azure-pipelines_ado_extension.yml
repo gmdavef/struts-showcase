@@ -22,7 +22,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: rl-scanner-task@1.0.10
+- task: rl-scanner-task@1
   displayName: 'RL scan'
   inputs:
     BUILD_PATH: 'target'
