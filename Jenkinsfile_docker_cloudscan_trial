@@ -28,8 +28,8 @@ pipeline {
                     --rl-portal-server=trial --rl-portal-org=Trial --rl-portal-group=ProdMgmt \
                     --purl=Apache/Struts2showcase@2.5.28-$BUILD_NUMBER \
                     --file-path=/packages/struts2-showcase.war \
-                    --report-path=/report --report-format=rl-summary-pdf,rl-json,cyclonedx \
-                    --diff-with=2.5.28-$PREV_BUILD_NUM
+                    --report-path=/report --report-format=rl-summary-pdf,rl-json,cyclonedx 
+                    # --diff-with=2.5.28-$PREV_BUILD_NUM
                     # --submit-only
                     ''' 
                 }
