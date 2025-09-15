@@ -38,8 +38,11 @@ pipeline {
     post {
         always {
             sh 'mkdir -p RLreport/latest && cp RLreport/$BUILD_NUMBER/*.json RLreport/latest'
+            sh 'cp RLreport/$BUILD_NUMBER/*.rl-safe RLreport/latest'
             archiveArtifacts artifacts: 'RLreport/latest/*.json', onlyIfSuccessful: false
+            archiveArtifacts artifacts: 'RLreport/latest/*.rl-safe', onlyIfSuccessful: false
             publishHTML(target : [reportDir: 'RLreport/$BUILD_NUMBER/rl-html', reportFiles: 'sdlc.html', reportName: 'ReversingLabs Report', allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportTitles: '', useWrapperFileDirectly: true])
         }
     }  
 }
+
