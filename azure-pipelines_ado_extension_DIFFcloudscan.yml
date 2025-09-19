@@ -44,7 +44,7 @@ steps:
     RLPORTAL_SERVER: 'trial'
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'ProdMgmt'
-    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@2.5.28-$(Build.BuildNumber)
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOextDIFF@2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
     RL_DIFF_WITH: 2.5.28-$PBN
   env:
