@@ -1,0 +1,66 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+# Set Build.BuildNumber to a simple incrementing integer
+name: $(Rev:r)
+
+steps:
+- task: Maven@4
+  displayName: 'Build'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx2048m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+- script: |
+    echo 'Build number is $(Build.BuildNumber)'
+    echo 'Build ID is $(Build.BuildId)'
+
+- task: Bash@3
+  displayName: 'Set prev build num'
+  inputs:
+    targetType: 'inline'
+    script: |
+      export BN=$(Build.BuildNumber)
+      echo 'BN is ' $BN
+      export PREVBN=$(($BN-1))
+      echo 'PREVBN is ' $PREVBN
+      echo "##vso[task.setvariable variable=pbn]$PREVBN"
+
+- task: rl-scanner-cloud-task@1
+  displayName: 'RL scan'
+  inputs:
+    BUILD_PATH: 'target'
+    REPORT_PATH: 'RLreport'
+    MY_ARTIFACT_TO_SCAN: 'struts2-showcase.war'
+    RLPORTAL_SERVER: 'trial'
+    RLPORTAL_ORG: 'Trial'
+    RLPORTAL_GROUP: 'ProdMgmt'
+    RL_PACKAGE_URL: Apache/Struts2showcaseADOext@2.5.28-$(Build.BuildNumber)
+    RL_VERBOSE: true 
+    # RL_DIFF_WITH: 2.5.28-$PBN
+  env:
+    RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
+  displayName: 'Publish CycloneDX'
+  artifact: 'CycloneDX-SBOM'
+  condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.spdx.json
+  displayName: 'Publish SPDX'
+  artifact: 'SPDX-SBOM'
+  condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
+  displayName: 'Publish RL-json'
+  artifact: ReversingLabs-JSONreport
+  condition: succeededOrFailed()
