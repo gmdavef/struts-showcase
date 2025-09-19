@@ -46,7 +46,7 @@ steps:
     RLPORTAL_GROUP: 'ProdMgmt'
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@2.5.28-$(Build.BuildNumber)
     RL_VERBOSE: true 
-    # RL_DIFF_WITH: 2.5.28-$PBN
+    RL_DIFF_WITH: 2.5.28-$PBN
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
 
