@@ -34,6 +34,7 @@ steps:
     RLPORTAL_ORG: 'Trial'
     RLPORTAL_GROUP: 'ProdMgmt'
     RL_PACKAGE_URL: Apache/Struts2showcaseADOext@2.5.28-$(Build.BuildNumber)
+    RL_FORCE: true
     RL_VERBOSE: true
   env:
     RLPORTAL_ACCESS_TOKEN: $(rlApiToken)
