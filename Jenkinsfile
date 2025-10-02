@@ -20,8 +20,11 @@ pipeline {
                 sh '/bin/RLSecure/rl-secure report -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER --format cyclonedx,spdx,rl-html,rl-json --output-path RLreports/$BUILD_NUMBER'
                 sh '/bin/RLSecure/rl-safe pack -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER --format all --output-path RLreports/$BUILD_NUMBER --no-tracking'
                 
-                // sh '/bin/RLSecure/rl-secure status -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER --no-color --return-status'
+                // Output summary-level results
                 sh '/bin/RLSecure/rl-secure list -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER --show-all --no-color'
+
+                // Return the status of the scan. 0=pass, 1=fail
+                sh '/bin/RLSecure/rl-secure status --return-status -s /bin/RLSecure -p Apache/struts2-showcase@2.5.28_$BUILD_NUMBER --no-color'
             }
         }
     }
