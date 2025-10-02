@@ -2,7 +2,7 @@ policies {
     profile "package_profile" {
     
         inherit_rules "project_profile"
-	rl_scan_level 5
+        rl_scan_level 1
 	
         processing
         {  
