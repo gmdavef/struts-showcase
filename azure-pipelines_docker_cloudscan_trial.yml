@@ -47,25 +47,24 @@ steps:
       echo 'BN is ' $BN
       export PREVBN=$(($BN-1))
       echo 'PREVBN is ' $PREVBN
-      echo "##vso[task.setvariable variable=pbn]$PREVBN"
+      echo "##vso[task.setvariable variable=PBN]$PREVBN"
 
 - bash: |
     mkdir -p $(REPORT_PATH)
-    echo 'PBN is ' $PBN
+    echo 'PBN is ' $(PBN)
     docker run --rm -u $(id -u):$(id -g) \
       -e RLPORTAL_ACCESS_TOKEN=$(RLPORTAL_ACCESS_TOKEN) \
       -v $(System.DefaultWorkingDirectory)/target:/packages:ro \
       -v $(System.DefaultWorkingDirectory)/$(REPORT_PATH):/report \
-      reversinglabs/rl-scanner-cloud:latest \
-        rl-scan \
+      reversinglabs/rl-scanner-cloud rl-scan \
           --rl-portal-server=$(RL_PORTAL_SERVER) \
           --rl-portal-org=$(RL_PORTAL_ORG) \
           --rl-portal-group=$(RL_PORTAL_GROUP) \
           --purl=$(RL_PACKAGE_URL)-$(Build.BuildNumber) \
           --file-path=/packages/$(ARTIFACT2SCAN) \
-          --report-path=/report \
-          --diff-with=2.5.28-$PBN \
-          --report-format=all
+          --report-path=/report --report-format=all \
+          --diff-with=2.5.28-$(PBN) --force
+          
   displayName: 'RL scan via rl-scanner-cloud Docker image'
 
 - publish: $(System.DefaultWorkingDirectory)/$(REPORT_PATH)/report.cyclonedx.json
