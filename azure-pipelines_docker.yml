@@ -36,7 +36,7 @@ steps:
         reversinglabs/rl-scanner:latest rl-scan \
         --package-path=/packages/struts2-showcase.war \
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx \
-        --rl-level=1 --force
+        --rl-level=1
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
