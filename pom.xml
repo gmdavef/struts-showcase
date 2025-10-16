@@ -245,6 +245,10 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+					<compilerArgs>
+						<!-- DF: added 10/16/2025 per https://javapro.io/2024/11/19/discovering-the-perfect-java-supply-chain-attack-vector-and-how-it-got-fixed/ -->
+                    	<arg>-proc:none</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
