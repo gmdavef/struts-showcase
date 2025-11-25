@@ -52,3 +52,8 @@ steps:
   displayName: 'Publish RL-HTML'
   artifact: ReversingLabs-HTMLreport
   condition: succeededOrFailed()
+
+- publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl-safe
+  displayName: 'Publish RL-SAFE archive'
+  artifact: ReversingLabs-RLsafe
+  condition: succeededOrFailed()
