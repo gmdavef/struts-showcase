@@ -1,7 +1,7 @@
 # struts-showcase
 The purpose of this repo is to provide example pipeline scripts for various CI/CD tools to illustrate scanning with the ReversingLabs Spectra Assure software supply chain security solution. Currently, scripts are provided for Jenkins, Azure DevOps, GitHub Actions, TeamCity, and GitLab.
 
-NOTE: This repo contains the source code and Maven build instructions (pom.xml) for the Struts2 showcase web app. This web app was released with Apache Struts v2.5.28. This choice is somewhat arbitrary, because Spectra Assure is capable of scanning nearly any type of software artifact that results from a build.
+NOTE: This repo contains the source code and Maven build instructions (pom.xml) for the Struts2 showcase web app. This web app was part of the Apache Struts v2.5.28 release. This choice is somewhat arbitrary, because Spectra Assure is capable of scanning nearly any type of software artifact that results from a build.
 
 ## Jenkins Examples
 
