@@ -2,14 +2,14 @@ policies {
     profile "package_profile" {
     
         inherit_rules "project_profile"
-        rl_scan_level 1
+        rl_scan_level 4
 	
         processing
         {  
             filter {
-                enabled   false
+                enabled   true
                 author    "security@company.com"
-                timestamp "2023-11-06T11:00:00+0000"
+                timestamp "2026-09-25T11:00:00+0000"
                 reason    "Example of ignoring all policies on a file."
                 matches   file
                 pattern   "dwr-1.1.1.jar"
