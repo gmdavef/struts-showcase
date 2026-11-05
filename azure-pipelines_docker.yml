@@ -23,7 +23,7 @@ steps:
     goals: 'package'
 
 - task: Bash@3
-  displayName: 'RL scan via Docker image'
+  displayName: 'Spectra Assure scan via rl-scanner Docker image'
   inputs:
     targetType: 'inline'
     script: |
