@@ -36,7 +36,7 @@ steps:
         reversinglabs/rl-scanner:latest rl-scan \
         --package-path=/packages/struts2-showcase.war \
         --report-path=/report --report-format=rl-html,rl-json,cyclonedx,spdx \
-        --rl-level=1
+        --rl-level=3
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.cyclonedx.json
   displayName: 'Publish CycloneDX'
@@ -50,10 +50,10 @@ steps:
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/report.rl.json
   displayName: 'Publish RL-json'  
-  artifact: ReversingLabs-JSONreport
+  artifact: RL-JSON-report
   condition: succeededOrFailed()
 
 - publish: $(System.DefaultWorkingDirectory)/RLreport/rl-html
   displayName: 'Publish RL-HTML'
-  artifact: ReversingLabs-HTMLreport
+  artifact: RL-HTML-report
   condition: succeededOrFailed()
